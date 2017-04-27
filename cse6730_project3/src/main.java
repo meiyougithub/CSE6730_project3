@@ -23,7 +23,9 @@ class VirusSim {
                     int tempPop = tempEvent.getNumPassenger();
                     City tempCity = tempEvent.getDestCity();
                     tempCity.setPopWithoutAntibody() = tempCity.getPopWithoutAntibody() + tempPop;
-                    tempEvent = events.first();
+                    if (!events.isEmpty()){
+                        tempEvent = events.first();
+                    }
 
             }
 
