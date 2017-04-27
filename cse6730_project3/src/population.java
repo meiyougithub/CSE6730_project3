@@ -42,5 +42,5 @@ public class population {
     public void setPopSymptom(int pop_symptom) {this.pop_symptom = pop_symptom;}
     public void setPopWithoutAntibody(int pop_withoutantibody) {this.pop_withoutantibody = pop_withoutantibody;}
     public void setTotalPop(int total_pop) {this.total_pop = total_pop;}
-    public void setPopQuarantine() {this.pop_quarantine = pop_quarantine;}
+    public void setPopQuarantine(int pop_quarantine) {this.pop_quarantine = pop_quarantine;}
 }
