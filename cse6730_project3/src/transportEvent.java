@@ -16,7 +16,7 @@ class TransportEvent implements Comparable<TransportEvent>{
     	return this.getDestTime() - ev.getDestTime();
     } 
 
-    int getDestTime(){return this.destTime;}
+    public int getDestTime(){return this.destTime;}
 
 
 }
