@@ -8,7 +8,7 @@ class VirusSim {
         int tick = 1;
         int maxLength = 4 * 7 * 24;
         int numCities = 50;
-        City[] cities = new Cities[numCities];
+        City[] cities = new City[numCities];
         TreeSet<TransportEvent> events = new TreeSet<>();
         /*
 
