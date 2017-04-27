@@ -5,7 +5,7 @@ public class Virus {
     private double v_rate_spread;
     private double v_rate_morbidity;
     private double v_rate_lethality;
-    public virus(double rate_spread, double rate_morbidity, double rate_lethality){
+    public Virus(double rate_spread, double rate_morbidity, double rate_lethality){
         v_rate_spread=rate_spread;
         v_rate_morbidity=rate_morbidity;
         v_rate_lethality=rate_lethality;
