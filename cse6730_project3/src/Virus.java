@@ -1,7 +1,7 @@
 /**
  * Created by WYF on 4/27/2017.
  */
-public class virus {
+public class Virus {
     private double v_rate_spread;
     private double v_rate_morbidity;
     private double v_rate_lethality;
