@@ -1,7 +1,7 @@
 /**
  * Created by WYF on 4/27/2017.
  */
-public class population {
+public class Population {
     private int total_pop; // total population 
     private int pop_antibody; // healthy people with antibody
     private int pop_withoutantibody; // healthy people without antibody
