@@ -10,12 +10,24 @@ public class virus {
         v_rate_morbidity=rate_morbidity;
         v_rate_lethality=rate_lethality;
     }
+    
+    public void computeInfected(Population population){
+        population.setPopInfected( poulation.getTotalPop() * v_rate_spread ); 
+    }
+    
+    public void computeMorbidity(Population population){
+        population.setPopSymptom( poulation.getPopInfected() * v_rate_morbidity );
+    }
+    
+    public void computeLethality(Population population){
+        population.setPopDead( poulation.getPopSymptom() * v_rate_lethality );
+    }
 
-    public double getV_rate_lethality() {return v_rate_lethality;}
-    public double getV_rate_morbidity() {return v_rate_morbidity;}
-    public double getV_rate_spread() {return v_rate_spread;}
-    public void setV_rate_lethality(double v_rate_lethality) {this.v_rate_lethality = v_rate_lethality;}
-    public void setV_rate_morbidity(double v_rate_morbidity) {this.v_rate_morbidity = v_rate_morbidity;}
-    public void setV_rate_spread(double v_rate_spread) {this.v_rate_spread = v_rate_spread;}
+    public double getRateLethality() {return v_rate_lethality;}
+    public double getRateMorbidity() {return v_rate_morbidity;}
+    public double geRateSpread() {return v_rate_spread;}
+    public void setRateLethality(double v_rate_lethality) {this.v_rate_lethality = v_rate_lethality;}
+    public void setRateMorbidity(double v_rate_morbidity) {this.v_rate_morbidity = v_rate_morbidity;}
+    public void setRateSpread(double v_rate_spread) {this.v_rate_spread = v_rate_spread;}
 
 }
