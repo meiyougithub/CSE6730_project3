@@ -11,15 +11,15 @@ public class virus {
         v_rate_lethality=rate_lethality;
     }
     
-    public void computeInfected(Population population){
-        population.setPopInfected( poulation.getTotalPop() * v_rate_spread ); 
+    public static void computeInfected(Population population){
+        population.setPopInfected( poulation.getPopWithoutAntibody() * v_rate_spread ); 
     }
     
-    public void computeMorbidity(Population population){
+    public static void computeMorbidity(Population population){
         population.setPopSymptom( poulation.getPopInfected() * v_rate_morbidity );
     }
     
-    public void computeLethality(Population population){
+    public static void computeLethality(Population population){
         population.setPopDead( poulation.getPopSymptom() * v_rate_lethality );
     }
 
