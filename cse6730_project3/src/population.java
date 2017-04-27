@@ -35,10 +35,12 @@ public class population {
     public int getPopDead() {return pop_dead;}
     public int getPopInfected() {return pop_infected;}
     public int getPopSymptom() {return pop_symptom;}
+    public int getPopQuarantine() {return pop_quarantine;}
     public void setPopAntibody(int pop_antibody) {this.pop_antibody = pop_antibody;}
     public void setPopDead(int pop_dead) {this.pop_dead = pop_dead;}
     public void setPopInfected(int pop_infected) {this.pop_infected = pop_infected;}
     public void setPopSymptom(int pop_symptom) {this.pop_symptom = pop_symptom;}
     public void setPopWithoutAntibody(int pop_withoutantibody) {this.pop_withoutantibody = pop_withoutantibody;}
     public void setTotalPop(int total_pop) {this.total_pop = total_pop;}
+    public void setPopQuarantine() {this.pop_quarantine = pop_quarantine;}
 }
