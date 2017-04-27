@@ -3,7 +3,7 @@
  */
 import java.util.Random;
 
-public class transportation {
+public class Transportation {
     private int air_passenger;
     private int train_passenger;
     private int bus_passenger;
