@@ -5,11 +5,12 @@ public class Hospital {
 
     private double cure_rate;
 
-    public Hospital(int max_vaccine, int max_patient, double cure_rate) {
-        this.max_vaccine = max_vaccine;
-        this.max_patient = max_patient;
-        this.cure_rate = cure_rate;
-    }
+    // public Hospital(int max_vaccine, int max_patient, int max_quarantine, double cure_rate) {
+    //     this.max_vaccine = max_vaccine;
+    //     this.max_patient = max_patient;
+    //     this.max_quarantine = max_quarantine;
+    //     this.cure_rate = cure_rate;
+    // }
 
     public static void quarantine(Population population) {
         int pop_infected = population.getPopInfected();

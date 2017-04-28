@@ -3,11 +3,11 @@ public class Virus {
     private double rate_morbidity = Parameter.rate_morbidity;
     private double rate_lethality = Parameter.rate_lethality;
 
-    public Virus(double rate_spread, double rate_morbidity, double rate_lethality) {
-        this.rate_spread = rate_spread;
-        this.rate_morbidity = rate_morbidity;
-        this.rate_lethality = rate_lethality;
-    }
+    // public Virus(double rate_spread, double rate_morbidity, double rate_lethality) {
+    //     this.rate_spread = rate_spread;
+    //     this.rate_morbidity = rate_morbidity;
+    //     this.rate_lethality = rate_lethality;
+    // }
     
     public static void computeInfected(Population population) {
         population.setPopInfected( (int) (population.getPopWithoutAntibody() * rate_spread) ); 

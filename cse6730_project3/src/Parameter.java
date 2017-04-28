@@ -12,7 +12,12 @@ public class Parameter {
 
     final static public double antibody_ratio;
 
-    public Parameter(int apm, int tpm, int spm, double asm, double tsm, double ssm, double rs, double rm, double rl, double ar) {
+    final static public int max_vaccine;
+    final static public int max_patient;
+    final static public int max_quarantine;
+    final static public double cure_rate;
+
+    public Parameter(int apm, int tpm, int spm, double asm, double tsm, double ssm, double rs, double rm, double rl, double ar, int mv, int mp, int mq, double cr) {
         air_passenger_mean = apm;
         train_passenger_mean = tpm;
         ship_passenger_mean = spm;
@@ -26,5 +31,11 @@ public class Parameter {
         rate_lethality = rl;
 
         antibody_ratio = ar;
+
+        max_vaccine = mv;
+        max_patient = mp;
+        max_quarantine = mq;
+
+        cure_rate = cr;
     }
 }
