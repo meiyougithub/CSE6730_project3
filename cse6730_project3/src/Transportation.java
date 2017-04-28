@@ -2,17 +2,17 @@ import java.util.*;
 
 public class Transportation {
 
-    private int air_passenger_mean = Parameter.air_passenger_mean;
-    private int train_passenger_mean = Parameter.train_passenger_mean;
-    private int ship_passenger_mean = Parameter.ship_passenger_mean;
-    private double air_speed_mean = Parameter.air_speed_mean;
-    private double train_speed_mean = Parameter.train_speed_mean;
-    private double ship_speed_mean = Parameter.ship_speed_mean;
+    private static int air_passenger_mean = Parameter.air_passenger_mean;
+    private static int train_passenger_mean = Parameter.train_passenger_mean;
+    private static int ship_passenger_mean = Parameter.ship_passenger_mean;
+    private static double air_speed_mean = Parameter.air_speed_mean;
+    private static double train_speed_mean = Parameter.train_speed_mean;
+    private static double ship_speed_mean = Parameter.ship_speed_mean;
 
     // Number of three types passengers
-    private int num_infected;
-    private int num_antibody;
-    private int num_withoutantibody;
+    private static int num_infected;
+    private static int num_antibody;
+    private static int num_withoutantibody;
 
     // public Transportation(int air_passenger_mean, int ship_passenger_mean, int train_passenger_mean, 
     //     double air_speed_mean, double train_speed_mean, double ship_speed_mean) {
@@ -30,7 +30,7 @@ public class Transportation {
         int total_pop = population.getTotalPop();
         int pop_infected = population.getPopInfected();
         int pop_antibody = population.getPopAntibody();
-        int pop_withoutantibody = population.getPopWithoutAntibody();
+//        int pop_withoutantibody = population.getPopWithoutAntibody();
 
         // Set the destination of this trip
         City destination = getDestination(departure);
@@ -47,7 +47,7 @@ public class Transportation {
         switch (trip_type) {
             case TransportEvent.AIR:
                 num_passenger = getNumPassengers(air_passenger_mean);
-                trip_time = Math.round(distance / getSpeed(air_speed));
+                trip_time = Math.round(distance / getSpeed(air_speed_mean));
                 break;
 
             case TransportEvent.TRAIN:
@@ -55,31 +55,31 @@ public class Transportation {
                 trip_time = Math.round(distance / getSpeed(train_speed_mean));
                 break;
 
-            case TransportEvent.SHIP:
+            default:
                 num_passenger = getNumPassengers(ship_passenger_mean);
                 trip_time = Math.round(distance / getSpeed(ship_speed_mean));
                 break;
         }
 
         // Set the number of three type passengers
-        setTripInfo(num_passenger, total_pop);
-        event = new TransportEvent(current_time + trip_time, destination, num_infected, num_antibody, num_withoutantibody, trip_type);
+        setTripInfo(num_passenger, total_pop, pop_infected, pop_antibody);
+        event = new TransportEvent((int) (current_time + trip_time), destination, num_infected, num_antibody, num_withoutantibody, trip_type);
         return event;
     }
 
-    public int getNumPassengers(int passenger_mean) {
+    public static int getNumPassengers(int passenger_mean) {
         double std = 0.05;
         int passenger = (int) ((VirusSim.rand.nextGaussian() * std + 1) * passenger_mean);
         return passenger;
     }
 
-    public double getSpeed(double speed_mean) {
+    public static double getSpeed(double speed_mean) {
         double std = 0.05;
         double speed = (int) ((VirusSim.rand.nextGaussian() * std + 1) * speed_mean);
         return speed;
     }
 
-    public City getDestination(City departure) {
+    public static City getDestination(City departure) {
         // Randomly choose the destination city
         int max = VirusSim.cities.length;
         int index = VirusSim.rand.nextInt(max);
@@ -89,7 +89,7 @@ public class Transportation {
         return VirusSim.cities[index];
     }
 
-    public void setTripInfo(int num_passenger, int total_pop) {
+    public static void setTripInfo(int num_passenger, int total_pop, int pop_infected, int pop_antibody) {
         num_infected = (int) (num_passenger / total_pop * pop_infected);
         num_antibody = (int) (num_passenger / total_pop * pop_antibody);
         num_withoutantibody = num_passenger - num_infected - num_antibody;

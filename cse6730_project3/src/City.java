@@ -61,6 +61,8 @@ public class City {
 
     public Population getPopulation() { return population; }
 
+    public String getName() { return name; }
+
     public double getLatitude() { return latitude; }
 
     public double getLongitude() { return longitude; }

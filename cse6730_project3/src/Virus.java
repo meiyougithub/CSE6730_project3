@@ -1,7 +1,7 @@
 public class Virus {
-    private double rate_spread = Parameter.rate_spread;
-    private double rate_morbidity = Parameter.rate_morbidity;
-    private double rate_lethality = Parameter.rate_lethality;
+    private static double rate_spread = Parameter.rate_spread;
+    private static double rate_morbidity = Parameter.rate_morbidity;
+    private static double rate_lethality = Parameter.rate_lethality;
 
     // public Virus(double rate_spread, double rate_morbidity, double rate_lethality) {
     //     this.rate_spread = rate_spread;

@@ -1,9 +1,9 @@
 public class Hospital {
-    private int max_vaccine;
-    private int max_patient;
-    private int max_quarantine;
+    private static int max_vaccine = Parameter.max_vaccine;
+    private static int max_patient = Parameter.max_patient;
+    private static int max_quarantine = Parameter.max_quarantine;
 
-    private double cure_rate;
+    private static double cure_rate = Parameter.cure_rate;
 
     // public Hospital(int max_vaccine, int max_patient, int max_quarantine, double cure_rate) {
     //     this.max_vaccine = max_vaccine;
@@ -14,14 +14,14 @@ public class Hospital {
 
     public static void quarantine(Population population) {
         int pop_infected = population.getPopInfected();
-        int pop_quarantine = (pop_infected < max_quarantine)? pop_infected : max_quarantine
+        int pop_quarantine = (pop_infected < max_quarantine)? pop_infected : max_quarantine;
         population.setPopQuarantine( population.getPopQuarantine() + pop_quarantine );
         population.setPopInfected( population.getPopInfected() - pop_quarantine );
     }
 
     public static void vaccinate(Population population) {
         int pop_withoutantibody = population.getPopWithoutAntibody();
-        int pop_vaccinated = (pop_withoutantibody < max_vaccine)? pop_withoutantibody : max_vaccine
+        int pop_vaccinated = (pop_withoutantibody < max_vaccine)? pop_withoutantibody : max_vaccine;
         population.setPopAntibody( population.getPopAntibody() + pop_vaccinated );
         population.setPopWithoutAntibody( population.getPopWithoutAntibody() - pop_vaccinated );
     }

@@ -1,21 +1,21 @@
 public class Parameter {
-    final static public int air_passenger_mean;
-    final static public int train_passenger_mean;
-    final static public int ship_passenger_mean;
-    final static public double air_speed_mean;
-    final static public double train_speed_mean;
-    final static public double ship_speed_mean;
+    public static int air_passenger_mean;
+    public static int train_passenger_mean;
+    public static int ship_passenger_mean;
+    public static double air_speed_mean;
+    public static double train_speed_mean;
+    public static double ship_speed_mean;
 
-    final static public double rate_spread;
-    final static public double rate_morbidity;
-    final static public double rate_lethality;
+    public static double rate_spread;
+    public static double rate_morbidity;
+    public static double rate_lethality;
 
-    final static public double antibody_ratio;
+    public static double antibody_ratio;
 
-    final static public int max_vaccine;
-    final static public int max_patient;
-    final static public int max_quarantine;
-    final static public double cure_rate;
+    public static int max_vaccine;
+    public static int max_patient;
+    public static int max_quarantine;
+    public static double cure_rate;
 
     public Parameter(int apm, int tpm, int spm, double asm, double tsm, double ssm, double rs, double rm, double rl, double ar, int mv, int mp, int mq, double cr) {
         air_passenger_mean = apm;
