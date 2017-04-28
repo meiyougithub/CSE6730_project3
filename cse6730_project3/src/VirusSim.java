@@ -9,6 +9,7 @@ public class VirusSim {
     public static City[] cities;
     public static TreeSet<TransportEvent> events = new TreeSet<>();
     public static Random rand = new Random();
+    public static int num_cities = 0;
 
     public static void main(String[] args){
         int debug = 2;
@@ -29,15 +30,15 @@ public class VirusSim {
             }
         }
 
-        int num_cities = myWindow.getNum_city();
+        num_cities = myWindow.getNum_city();
         String csvFile = "city_pop.csv";
         String line = "";
         String csvsplit = ",";
         cities = new City[num_cities];
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            int i = -1;
+            int id = -1;
             while ((line = br.readLine()) != null) {
-                if (i != -1 && i < num_cities) {
+                if (id != -1 && id < num_cities) {
                     String[] temp = line.split(csvsplit);
                     String city_name = temp[1];
                     System.out.println(city_name);
@@ -47,15 +48,31 @@ public class VirusSim {
                     double longitude = Double.parseDouble(temp[7].trim());
                    // System.out.println(city_name +" "+ total_population+" "+latitude+" "+longitude);
                     Population pop_tmp = new Population(total_population);
-                    City city_tmp =new City(city_name,pop_tmp,latitude,longitude);
-                    cities[i]=city_tmp;
+                    City city_tmp =new City(city_name,pop_tmp,latitude,longitude,id);
+                    cities[id]=city_tmp;
                 }
-                i++;
+                id++;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        // prepare distance matrix
+        City.computeDistance();
+
+        // prepare distance prob matrix
+        City.computeDistanceProb();
+
+        // prepare pop vector
+        City.computePop();
+
+        // prepare pop prob vector
+        for (int i = 0; i < num_cities; i++){
+            cities[i].computePopProb();
+        }
+
 
        while (clock < max_length) {
             if (!events.isEmpty()) {

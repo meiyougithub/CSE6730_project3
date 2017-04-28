@@ -38,4 +38,23 @@ public class Parameter {
 
         cure_rate = cr;
     }
+
+
+    public static void printMatrix(double[][] mat){
+        int n = mat.length;
+        int m = mat[0].length;
+        for (int i = 0; i < n ; i++){
+            for (int j = 0; j < m; j++)
+                System.out.print(mat[i][j]+" ");
+            System.out.println();
+        }
+    }
+
+    public static void printMatrix(double[] mat){
+        int n = mat.length;
+        for (int i = 0; i < n ; i++){
+            System.out.print(mat[i]+" ");
+            System.out.println();
+        }
+    }
 }

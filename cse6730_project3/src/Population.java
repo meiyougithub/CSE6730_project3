@@ -1,4 +1,12 @@
 public class Population {
+    public static int grand_total_pop = 0;
+    public static int grand_pop_antibody = 0;
+    public static int grand_pop_withoutantibody = 0;
+    public static int grand_pop_dead = 0;
+    public static int grand_pop_symptom = 0;
+    public static int grand_pop_infected = 0;
+    public static int grand_pop_quarantine = 0;
+
     private int total_pop; // total population 
     private int pop_antibody; // healthy people with antibody
     private int pop_withoutantibody; // healthy people without antibody
@@ -16,6 +24,7 @@ public class Population {
         this.pop_dead = 0;
         this.pop_symptom = 0;
         this.pop_infected = 0;
+        grand_total_pop += total_pop;
     }
     
     public Population(int total_pop,int pop_antibody, int pop_withoutantibody, int pop_dead, int pop_symptom, int pop_infected) {
