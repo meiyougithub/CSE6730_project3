@@ -2,23 +2,6 @@
  * Created by WYF on 4/28/2017.
  */
 public class InputWindow extends javax.swing.JFrame{
-    private int air_passenger_mean;
-    private int train_passenger_mean;
-    private int ship_passenger_mean;
-    private double air_speed_mean;
-    private double train_speed_mean;
-    private double ship_speed_mean;
-
-    private double rate_spread;
-    private double rate_morbidity;
-    private double rate_lethality;
-
-    private double antibody_ratio;
-
-    private int max_vaccine;
-    private int max_patient;
-    private int max_quarantine;
-    private double cure_rate;
 
     private int num_city;
 
@@ -28,11 +11,11 @@ public class InputWindow extends javax.swing.JFrame{
      */
     public InputWindow() {
         initComponents();
-        t_apm.setText(Integer.toString(100));
-        t_tpm.setText(Integer.toString(100));
-        t_spm.setText(Integer.toString(100));
-        t_asm.setText(Double.toString(100));
-        t_tsm.setText(Double.toString(100));
+        t_apm.setText(Integer.toString(300));
+        t_tpm.setText(Integer.toString(400));
+        t_spm.setText(Integer.toString(200));
+        t_asm.setText(Double.toString(900));
+        t_tsm.setText(Double.toString(150));
         t_ssm.setText(Double.toString(100));
         t_apm.setEditable(false);
         t_tpm.setEditable(false);
@@ -40,15 +23,15 @@ public class InputWindow extends javax.swing.JFrame{
         t_asm.setEditable(false);
         t_tsm.setEditable(false);
         t_ssm.setEditable(false);
-        t_rs.setText(Double.toString(100));
-        t_rm.setText(Double.toString(100));
-        t_rl.setText(Double.toString(100));
-        t_ar.setText(Double.toString(100));
+        t_rs.setText(Double.toString(20));
+        t_rm.setText(Double.toString(20));
+        t_rl.setText(Double.toString(1));
+        t_ar.setText(Double.toString(0.1));
         t_mv.setText(Integer.toString(100));
         t_mp.setText(Integer.toString(100));
         t_mq.setText(Integer.toString(100));
-        t_cr.setText(Double.toString(100));
-        t_cn.setText(Integer.toString(100));
+        t_cr.setText(Double.toString(5));
+        t_cn.setText(Integer.toString(3));
     }
 
     /**
@@ -318,20 +301,20 @@ public class InputWindow extends javax.swing.JFrame{
 
     private void run_buttonActionPerformed(java.awt.event.ActionEvent evt) {
         System.out.println("pressed run");
-        air_passenger_mean=Integer.parseInt(t_apm.getText());
-        train_passenger_mean=Integer.parseInt(t_tpm.getText());
-        ship_passenger_mean=Integer.parseInt(t_tpm.getText());
-        air_speed_mean=Double.parseDouble(t_asm.getText());
-        train_speed_mean=Double.parseDouble(t_tpm.getText());
-        ship_speed_mean=Double.parseDouble(t_ssm.getText());
-        rate_spread=Double.parseDouble(t_rs.getText());
-        rate_morbidity=Double.parseDouble(t_rm.getText());
-        rate_lethality=Double.parseDouble(t_rl.getText());
-        antibody_ratio=Double.parseDouble(t_ar.getText());
-        max_vaccine=Integer.parseInt(t_mv.getText());
-        max_patient=Integer.parseInt(t_mp.getText());
-        max_quarantine=Integer.parseInt(t_mq.getText());
-        cure_rate=Double.parseDouble(t_cr.getText());
+        Parameter.air_passenger_mean=Integer.parseInt(t_apm.getText());
+        Parameter.train_passenger_mean=Integer.parseInt(t_tpm.getText());
+        Parameter.ship_passenger_mean=Integer.parseInt(t_tpm.getText());
+        Parameter.air_speed_mean=Double.parseDouble(t_asm.getText());
+        Parameter.train_speed_mean=Double.parseDouble(t_tpm.getText());
+        Parameter.ship_speed_mean=Double.parseDouble(t_ssm.getText());
+        Parameter.rate_spread=Double.parseDouble(t_rs.getText())/100.;
+        Parameter.rate_morbidity=Double.parseDouble(t_rm.getText())/100.;
+        Parameter.rate_lethality=Double.parseDouble(t_rl.getText())/100.;
+        Parameter.antibody_ratio=Double.parseDouble(t_ar.getText())/100.;
+        Parameter.max_vaccine=Integer.parseInt(t_mv.getText());
+        Parameter.max_patient=Integer.parseInt(t_mp.getText());
+        Parameter.max_quarantine=Integer.parseInt(t_mq.getText());
+        Parameter.cure_rate=Double.parseDouble(t_cr.getText());
         num_city=Integer.parseInt(t_cn.getText());
         pressed_or_not=true;
     }

@@ -38,6 +38,8 @@ public class Transportation {
         // Compute the distance between departure and destination
         double distance = City.distance(departure, destination);
 
+//        System.out.println("distance: " + distance);
+
         // Declare a transportation event
         TransportEvent event;
         int num_passenger;
@@ -48,22 +50,25 @@ public class Transportation {
             case TransportEvent.AIR:
                 num_passenger = getNumPassengers(air_passenger_mean);
                 trip_time = Math.round(distance / getSpeed(air_speed_mean));
+//                System.out.println("air: " + air_speed_mean);
                 break;
 
             case TransportEvent.TRAIN:
                 num_passenger = getNumPassengers(train_passenger_mean);
                 trip_time = Math.round(distance / getSpeed(train_speed_mean));
+//                System.out.println("train: " + train_speed_mean);
                 break;
 
             default:
                 num_passenger = getNumPassengers(ship_passenger_mean);
                 trip_time = Math.round(distance / getSpeed(ship_speed_mean));
+//                System.out.println("ship: " + ship_speed_mean);
                 break;
         }
 
         // Set the number of three type passengers
         setTripInfo(num_passenger, total_pop, pop_infected, pop_antibody);
-        event = new TransportEvent((int) (current_time + trip_time), destination, num_infected, num_antibody, num_withoutantibody, trip_type);
+        event = new TransportEvent((int) (current_time + trip_time), departure, destination, num_infected, num_antibody, num_withoutantibody, trip_type);
         return event;
     }
 

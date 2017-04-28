@@ -3,6 +3,7 @@ import java.util.*;
 public class City {
     private Population population;
     private String name;
+    private int num_air = 1, num_train = 1, num_ship = 1;
 
     // Latitude and longitude of this city
     final private double latitude;

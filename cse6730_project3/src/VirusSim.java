@@ -5,15 +5,16 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class VirusSim {
-    int num_cities = 50;
+
     public static City[] cities;
-    public static TreeSet<TransportEvent> events;
-    public static Random rand;
+    public static TreeSet<TransportEvent> events = new TreeSet<>();
+    public static Random rand = new Random();
 
     public static void main(String[] args){
+        int debug = 0;
         int clock = 0;
-        int tick = 1;
-        int max_length = 4 * 7 * 24;
+        int tick = 60; // in minutes
+        int max_length = (int) (4 * 7 * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
         myWindow.setSize(800, 600);
@@ -27,24 +28,26 @@ public class VirusSim {
             }
         }
 
-        int num_city = myWindow.getNum_city();
+        int num_cities = myWindow.getNum_city();
         String csvFile = "city_pop.csv";
         String line = "";
         String csvsplit = ",";
-        City[] cityList = new City[num_city];
+        cities = new City[num_cities];
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             int i = -1;
             while ((line = br.readLine()) != null) {
-                if (i != -1 && i<num_city) {
+                if (i != -1 && i < num_cities) {
                     String[] temp = line.split(csvsplit);
                     String city_name = temp[1];
-                    int total_population = Integer.parseInt(temp[3]);
-                    double latitude = Double.parseDouble(temp[6]);
-                    double longitude = Double.parseDouble(temp[7]);
+                    System.out.println(city_name);
+                    System.out.println(temp[3].trim());
+                    int total_population = Integer.parseInt(temp[3].trim());
+                    double latitude = Double.parseDouble(temp[6].trim());
+                    double longitude = Double.parseDouble(temp[7].trim());
                    // System.out.println(city_name +" "+ total_population+" "+latitude+" "+longitude);
                     Population pop_tmp = new Population(total_population);
                     City city_tmp =new City(city_name,pop_tmp,latitude,longitude);
-                    cityList[i]=city_tmp;
+                    cities[i]=city_tmp;
                 }
                 i++;
             }
@@ -52,38 +55,48 @@ public class VirusSim {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
 
-        Initialize cities here
-
-        Initialize event list here
-
-        */
        while (clock < max_length) {
             if (!events.isEmpty()) {
                 TransportEvent temp_event = events.first();
                 while (temp_event.getDestTime() == clock) {
-                    events.remove();
+                    events.pollFirst();
                     City temp_city = temp_event.getDestCity();
                     temp_city.handle(temp_event);
                     if (!events.isEmpty()){
-                        tempEvent = events.first();
+                        temp_event = events.first();
                     } else {
                         break;
                     }
                 }
             }
 
-            for (int i = 0; i < numCities; i++){
+            for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
                 cities[i].virusTurn();
                 cities[i].transportTurn(clock);
 
             }
-
+            if (clock % 50 == 0){
+                printEvents(events, clock);
+            }
             clock ++;
         }
-
+        System.out.print("end");
     }
 
+    public static void printEvents(TreeSet events, int clock){
+        System.out.println("===== Events print out at clock " + clock + " with size of " + events.size() + " =====");
+        for (Object ev : events) {
+            printEvent((TransportEvent)ev);
+        }
+    }
+
+    public static void printEvent(TransportEvent ev){
+        System.out.print("(time: " + ev.getDestTime());
+        System.out.print(", daoda: " + ev.getDestCity().getName());
+        System.out.print(", chufa: " + ev.getDeptCity().getName());
+        System.out.print(", type: " + ev.getType());
+        System.out.println(")");
+    }
 }
