@@ -26,7 +26,7 @@ class VirusSim {
                     if (!events.isEmpty()){
                         tempEvent = events.first();
                     }
-
+                }
             }
 
             for (int i = 0; i < numCities; i++){
