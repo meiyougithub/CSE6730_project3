@@ -26,13 +26,16 @@ class VirusSim {
                     if (!events.isEmpty()){
                         tempEvent = events.first();
                     }
+                    else{
+                        break;
+                    }
                 }
             }
 
             for (int i = 0; i < numCities; i++){
-                Cities[i].hospitalTurn();
-                Cities[i].virusTurn();
-                Cities[i].transportTurn(clock, events);
+                cities[i].hospitalTurn();
+                cities[i].virusTurn();
+                cities[i].transportTurn(clock, events);
 
             }
         }
