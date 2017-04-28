@@ -1,33 +1,31 @@
-/**
- * Created by WYF on 4/27/2017.
- */
 public class Virus {
-    private double v_rate_spread;
-    private double v_rate_morbidity;
-    private double v_rate_lethality;
-    public Virus(double rate_spread, double rate_morbidity, double rate_lethality){
-        v_rate_spread=rate_spread;
-        v_rate_morbidity=rate_morbidity;
-        v_rate_lethality=rate_lethality;
+    private double rate_spread = Parameter.rate_spread;
+    private double rate_morbidity = Parameter.rate_morbidity;
+    private double rate_lethality = Parameter.rate_lethality;
+
+    public Virus(double rate_spread, double rate_morbidity, double rate_lethality) {
+        this.rate_spread = rate_spread;
+        this.rate_morbidity = rate_morbidity;
+        this.rate_lethality = rate_lethality;
     }
     
-    public static void computeInfected(Population population){
-        population.setPopInfected( poulation.getPopWithoutAntibody() * v_rate_spread ); 
+    public static void computeInfected(Population population) {
+        population.setPopInfected( (int) (population.getPopWithoutAntibody() * rate_spread) ); 
     }
     
-    public static void computeMorbidity(Population population){
-        population.setPopSymptom( poulation.getPopInfected() * v_rate_morbidity );
+    public static void computeMorbidity(Population population) {
+        population.setPopSymptom( (int) (population.getPopInfected() * rate_morbidity) );
     }
     
-    public static void computeLethality(Population population){
-        population.setPopDead( poulation.getPopSymptom() * v_rate_lethality );
+    public static void computeLethality(Population population) {
+        population.setPopDead( (int) (population.getPopSymptom() * rate_lethality) );
     }
 
-    public double getRateLethality() {return v_rate_lethality;}
-    public double getRateMorbidity() {return v_rate_morbidity;}
-    public double geRateSpread() {return v_rate_spread;}
-    public void setRateLethality(double v_rate_lethality) {this.v_rate_lethality = v_rate_lethality;}
-    public void setRateMorbidity(double v_rate_morbidity) {this.v_rate_morbidity = v_rate_morbidity;}
-    public void setRateSpread(double v_rate_spread) {this.v_rate_spread = v_rate_spread;}
+    public double getRateLethality() { return rate_lethality; }
+    public double getRateMorbidity() { return rate_morbidity; }
+    public double geRateSpread() { return rate_spread; }
+    public void setRateLethality(double rate_lethality) { this.rate_lethality = rate_lethality; }
+    public void setRateMorbidity(double rate_morbidity) { this.rate_morbidity = rate_morbidity; }
+    public void setRateSpread(double rate_spread) { this.rate_spread = rate_spread; }
 
 }
