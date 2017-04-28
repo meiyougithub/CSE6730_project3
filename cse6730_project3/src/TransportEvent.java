@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class TransportEvent implements Comparable<TransportEvent> {
+    private static int numEvents = 0;
 
     final static int AIR = 0;
     final static int TRAIN = 1;
@@ -13,6 +14,7 @@ public class TransportEvent implements Comparable<TransportEvent> {
     private int trip_type;
 	private City dest_city;
 	private City dept_city;
+	private int id;
 
 	public TransportEvent(int dest_time, City dept_city, City dest_city, int num_infected, int num_antibody, int num_withoutantibody, int trip_type){
 		this.dest_time = dest_time;
@@ -22,10 +24,16 @@ public class TransportEvent implements Comparable<TransportEvent> {
         this.num_antibody = num_antibody;
         this.num_withoutantibody = num_withoutantibody;
         this.trip_type = trip_type;
+        this.id = numEvents ++;
 	}
 
     public int compareTo (final TransportEvent ev) {
-    	return this.getDestTime() - ev.getDestTime();
+    	if (this.getDestTime() - ev.getDestTime() == 0){
+            return this.getId() - ev.getId();
+        }
+        else{
+            return this.getDestTime() - ev.getDestTime();
+        }
     } 
 
     public int getDestTime() { return dest_time; }
@@ -49,5 +57,7 @@ public class TransportEvent implements Comparable<TransportEvent> {
             return "ERROR TRIP";
         }
     }
+
+    public int getId() { return id; }
 
 }

@@ -46,6 +46,48 @@ public class City {
         }
     }
 
+    public void transportTurn(int current_time, int debug) {
+        if (debug == 0) {
+            // Set air event
+            for (int i = 0; i < num_air; i++) {
+                TransportEvent airEvent = Transportation.depart(current_time, this, TransportEvent.AIR);
+                VirusSim.events.add(airEvent);
+            }
+            // Set train event
+            for (int i = 0; i < num_train; i++) {
+                TransportEvent trainEvent = Transportation.depart(current_time, this, TransportEvent.TRAIN);
+                VirusSim.events.add(trainEvent);
+            }
+            // Set ship event
+            for (int i = 0; i < num_ship; i++) {
+                TransportEvent shipEvent = Transportation.depart(current_time, this, TransportEvent.SHIP);
+                VirusSim.events.add(shipEvent);
+            }
+        } else {
+            // Set air event
+            for (int i = 0; i < num_air; i++) {
+                TransportEvent airEvent = Transportation.depart(current_time, this, TransportEvent.AIR);
+                VirusSim.events.add(airEvent);
+                System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
+                VirusSim.printEvent(airEvent);
+            }
+            // Set train event
+            for (int i = 0; i < num_train; i++) {
+                TransportEvent trainEvent = Transportation.depart(current_time, this, TransportEvent.TRAIN);
+                VirusSim.events.add(trainEvent);
+                System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
+                VirusSim.printEvent(trainEvent);
+            }
+            // Set ship event
+            for (int i = 0; i < num_ship; i++) {
+                TransportEvent shipEvent = Transportation.depart(current_time, this, TransportEvent.SHIP);
+                VirusSim.events.add(shipEvent);
+                System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
+                VirusSim.printEvent(shipEvent);
+            }
+        }
+    }
+
     public void handle(TransportEvent event) {
         population.setPopInfected( population.getPopInfected() + event.getNumInfected() );
         population.setPopAntibody( population.getPopAntibody() + event.getNumAntibody() );

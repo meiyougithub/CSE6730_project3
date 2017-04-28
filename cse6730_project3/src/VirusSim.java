@@ -11,10 +11,11 @@ public class VirusSim {
     public static Random rand = new Random();
 
     public static void main(String[] args){
-        int debug = 0;
+        int debug = 2;
         int clock = 0;
         int tick = 60; // in minutes
-        int max_length = (int) (4 * 7 * 24 * 60 / tick);
+        int days = 1; // one month = four weeks = 28 days
+        int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
         myWindow.setSize(800, 600);
@@ -74,13 +75,16 @@ public class VirusSim {
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
                 cities[i].virusTurn();
-                cities[i].transportTurn(clock);
+                cities[i].transportTurn(clock, debug);
 
             }
-            if (clock % 50 == 0){
-                printEvents(events, clock);
+            if (debug == 2){
+                if (clock % 2 == 0){
+                    printEvents(events, clock);
+                }
+
             }
-            clock ++;
+           clock ++;
         }
         System.out.print("end");
     }
