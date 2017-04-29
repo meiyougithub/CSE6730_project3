@@ -25,12 +25,12 @@ public class InputWindow extends javax.swing.JFrame{
         t_ssm.setEditable(false);
         t_rs.setText(Double.toString(20));
         t_rm.setText(Double.toString(20));
-        t_rl.setText(Double.toString(1));
+        t_rl.setText(Double.toString(20));
         t_ar.setText(Double.toString(0.1));
         t_mv.setText(Integer.toString(100));
         t_mp.setText(Integer.toString(100));
         t_mq.setText(Integer.toString(100));
-        t_cr.setText(Double.toString(5));
+        t_cr.setText(Double.toString(0));
         t_cn.setText(Integer.toString(3));
     }
 
@@ -307,7 +307,7 @@ public class InputWindow extends javax.swing.JFrame{
         Parameter.air_speed_mean=Double.parseDouble(t_asm.getText());
         Parameter.train_speed_mean=Double.parseDouble(t_tpm.getText());
         Parameter.ship_speed_mean=Double.parseDouble(t_ssm.getText());
-        Parameter.rate_spread=Double.parseDouble(t_rs.getText())/100.;
+        Parameter.rate_spread=Double.parseDouble(t_rs.getText());
         Parameter.rate_morbidity=Double.parseDouble(t_rm.getText())/100.;
         Parameter.rate_lethality=Double.parseDouble(t_rl.getText())/100.;
         Parameter.antibody_ratio=Double.parseDouble(t_ar.getText())/100.;

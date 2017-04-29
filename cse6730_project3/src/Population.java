@@ -23,7 +23,7 @@ public class Population {
         this.pop_withoutantibody = total_pop - pop_antibody;
         this.pop_dead = 0;
         this.pop_symptom = 0;
-        this.pop_infected = 0;
+        this.pop_infected = 1;
         grand_total_pop += total_pop;
     }
     

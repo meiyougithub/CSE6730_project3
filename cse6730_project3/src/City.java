@@ -131,22 +131,22 @@ public class City {
             for (int i = 0; i < num_air; i++) {
                 TransportEvent airEvent = Transportation.depart(current_time, this, TransportEvent.AIR);
                 VirusSim.events.add(airEvent);
-                System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
-                VirusSim.printEvent(airEvent);
+                //System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
+                //VirusSim.printEvent(airEvent);
             }
             // Set train event
             for (int i = 0; i < num_train; i++) {
                 TransportEvent trainEvent = Transportation.depart(current_time, this, TransportEvent.TRAIN);
                 VirusSim.events.add(trainEvent);
-                System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
-                VirusSim.printEvent(trainEvent);
+                //System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
+                //VirusSim.printEvent(trainEvent);
             }
             // Set ship event
             for (int i = 0; i < num_ship; i++) {
                 TransportEvent shipEvent = Transportation.depart(current_time, this, TransportEvent.SHIP);
                 VirusSim.events.add(shipEvent);
-                System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
-                VirusSim.printEvent(shipEvent);
+                //System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
+                //VirusSim.printEvent(shipEvent);
             }
         }
     }

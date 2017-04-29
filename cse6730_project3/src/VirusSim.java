@@ -17,8 +17,7 @@ public class VirusSim {
         int tick = 60; // in minutes
         int days = 1; // one month = four weeks = 28 days
         int[] compute_death= new int [57];
-        int max_length=24;
-        int[] grand_population_state = new int[57];
+        int max_length=300;
         //int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
@@ -77,9 +76,6 @@ public class VirusSim {
         for (int i = 0; i < num_cities; i++){
             cities[i].computePopProb();
         }
-        for (int i = 0; i < num_cities; i++){
-            grand_population_state[cities[i].getstateId] += cities[i].getPopulation.getTotalPop();
-        }
 
 
        while (clock < max_length) {
@@ -101,13 +97,21 @@ public class VirusSim {
                 cities[i].hospitalTurn();
                 cities[i].virusTurn();
                 cities[i].transportTurn(clock, debug);
-
             }
-           if (clock == 300)
+           for (int i = 0; i < num_cities; i++)
+           {
+               Population temp = cities[i].getPopulation();
+               if (temp.getPopDead() != 0)
+                   System.out.println("clock: "+clock +" "+cities[i].getName()+" "+temp.getTotalPop()+" "+temp.getPopDead()+" "+temp.getPopInfected());
+               compute_death[cities[i].getstateId()] += temp.getPopDead();
+           }
+
+           if (clock == 100)
            {
                for (int i = 0; i < num_cities; i++)
                {
                    Population temp = cities[i].getPopulation();
+                   System.out.println(cities[i].getName()+" "+temp.getTotalPop());
                    compute_death[cities[i].getstateId()] += temp.getPopDead();
                }
                for (int i = 0; i < 57; i++)
@@ -115,35 +119,32 @@ public class VirusSim {
                    System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
                }
            }
-            
-            if (debug == 2){
+           if (debug == 2){
                 if (clock % 2 == 0){
-                  printEvents(events, clock);
+                    printEvents(events, clock);
                 }
-
-            }
-           
+           }
            clock ++;
         }
-        System.out.print("end");
+        System.out.print("end\n");
         for (int i = 0; i < 57; i++)
         {
-            System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
+        System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
         }
     }
 
-    public static void printEvents(TreeSet events, int clock){
-        System.out.println("===== Events print out at clock " + clock + " with size of " + events.size() + " =====");
-        for (Object ev : events) {
-            printEvent((TransportEvent)ev);
+public static void printEvents(TreeSet events, int clock){
+//        System.out.println("===== Events print out at clock " + clock + " with size of " + events.size() + " =====");
+//        for (Object ev : events) {
+//            printEvent((TransportEvent)ev);
+//        }
         }
-    }
 
-    public static void printEvent(TransportEvent ev){
-        System.out.print("(time: " + ev.getDestTime());
-        System.out.print(", daoda: " + ev.getDestCity().getName());
-        System.out.print(", chufa: " + ev.getDeptCity().getName());
-        System.out.print(", type: " + ev.getType());
-        System.out.println(")");
-    }
-}
+public static void printEvent(TransportEvent ev){
+//        System.out.print("(time: " + ev.getDestTime());
+//        System.out.print(", daoda: " + ev.getDestCity().getName());
+//        System.out.print(", chufa: " + ev.getDeptCity().getName());
+//        System.out.print(", type: " + ev.getType());
+//        System.out.println(")");
+        }
+        }
