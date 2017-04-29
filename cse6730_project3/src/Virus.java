@@ -11,7 +11,9 @@ public class Virus {
     
     public static void computeInfected(Population population) {
         int infected = (int) (population.getPopInfected() * rate_spread);
-        
+        if (infected > population.getPopWithoutAntibody()){
+            infected = population.getPopWithoutAntibody();
+        }
         population.setPopInfected(population.getPopInfected() + infected);
         population.setPopWithoutAntibody( population.getPopWithoutAntibody() - infected);
         
@@ -28,7 +30,9 @@ public class Virus {
     
     public static void computeLethality(Population population) {
         int dead = (int) (population.getPopSymptom() * rate_lethality);
-        
+        if (dead > population.getTotalPop()-population.getPopAntibody()){
+            dead = population.getTotalPop()-population.getPopAntibody();
+        }
         population.setPopDead( population.getPopDead() + dead );
         population.setTotalPop( population.getTotalPop() - dead );
         Population.grand_total_pop -= dead;
