@@ -14,10 +14,16 @@ public class Hospital {
 
     public static void quarantine(Population population) {
         int pop_infected = population.getPopInfected();
-        int pop_quarantine = (pop_infected < max_quarantine)? pop_infected : max_quarantine;
-        population.setPopQuarantine( population.getPopQuarantine() + pop_quarantine );
-        population.setPopInfected( population.getPopInfected() - pop_quarantine );
+        int pop_quarantine = population.getPopQuarantine();
+
+        if (pop_quarantine < max_quarantine) {
+            int diff = max_quarantine - pop_quarantine;
+            int tmp_quarantine = (pop_infected < diff)? pop_infected : diff;
+            population.setPopQuarantine( population.getPopQuarantine() + tmp_quarantine );
+            population.setPopInfected( population.getPopInfected() - tmp_quarantine );
+        }
     }
+
 
     public static void vaccinate(Population population) {
         int pop_withoutantibody = population.getPopWithoutAntibody();
