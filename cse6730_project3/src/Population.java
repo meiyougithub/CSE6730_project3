@@ -19,21 +19,13 @@ public class Population {
     
     public Population(int total_pop) {
         this.total_pop = total_pop;
+        this.pop_infected = 5;
         this.pop_antibody = (int) (total_pop * antibody_ratio);
-        this.pop_withoutantibody = total_pop - pop_antibody;
+        this.pop_withoutantibody = total_pop - pop_antibody - this.pop_infected;
         this.pop_dead = 0;
         this.pop_symptom = 0;
-        this.pop_infected = 1;
+
         grand_total_pop += total_pop;
-    }
-    
-    public Population(int total_pop,int pop_antibody, int pop_withoutantibody, int pop_dead, int pop_symptom, int pop_infected) {
-        this.total_pop = total_pop;
-        this.pop_antibody = pop_antibody;
-        this.pop_withoutantibody = pop_withoutantibody;
-        this.pop_dead = pop_dead;
-        this.pop_symptom = pop_symptom;
-        this.pop_infected = pop_infected;
     }
 
     public int getTotalPop() { return total_pop; }
