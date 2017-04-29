@@ -8,6 +8,7 @@ public class City {
     private static double[] pop_mat;
     private static double[][] distance_prob;
     private double[] pop_prob;
+    private String state_name;
 
     private int cityId;
 
@@ -160,6 +161,7 @@ public class City {
     public Population getPopulation() { return population; }
 
     public String getName() { return name; }
+    public String getState() { return state_name;}
 
     public double getLatitude() { return latitude; }
 
