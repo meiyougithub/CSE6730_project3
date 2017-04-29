@@ -109,10 +109,10 @@ public class Transportation {
         num_withoutantibody = (tmp < pop_withoutantibody)? tmp : pop_withoutantibody;
     }
     
-    public static void updatePopulation(Population population, TranspotEvent event) {
+    public static void updatePopulation(Population population, TransportEvent event) {
         population.setTotalPop( population.getTotalPop() - event.getNumPassenger() );
         population.setPopInfected( population.getPopInfected() - event.getNumInfected() );
-        population.setPopAntibody( population.getPopAntibody() - event.getNumAntibody);
+        population.setPopAntibody( population.getPopAntibody() - event.getNumAntibody() );
         population.setPopWithoutAntibody( population.getPopWithoutAntibody() - event.getNumWithoutAntibody());
     }
 
