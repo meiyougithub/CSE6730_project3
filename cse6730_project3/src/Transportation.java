@@ -33,7 +33,7 @@ public class Transportation {
 //        int pop_withoutantibody = population.getPopWithoutAntibody();
 
         // Set the destination of this trip
-        City destination = getDestination(departure);
+        City destination = getDestination(departure, trip_type);
 
         // Compute the distance between departure and destination
         double distance = City.distance(departure, destination);
@@ -84,13 +84,19 @@ public class Transportation {
         return speed;
     }
 
-    public static City getDestination(City departure) {
+    public static City getDestination(City departure, int trip_type) {
         // Randomly choose the destination city
-        int max = VirusSim.cities.length;
-        int index = VirusSim.rand.nextInt(max);
-        while (departure == VirusSim.cities[index]){
-            index = VirusSim.rand.nextInt(max);
+        double prob = Math.random();
+        int index;
+        double[] prob_array;
+        if (trip_type != TransportEvent.SHIP){
+            prob_array = departure.getPopProb();
         }
+        else{
+            prob_array = departure.getDistProb();
+        }
+        index = Parameter.naiveSearch(prob, prob_array);
+
         return VirusSim.cities[index];
     }
 

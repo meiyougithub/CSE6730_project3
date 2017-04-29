@@ -8,23 +8,23 @@ public class City {
     private static double[] pop_mat;
     private static double[][] distance_prob;
     private double[] pop_prob;
-    private String state_name;
 
     private int cityId;
-    private int stateId;
 
     // Latitude and longitude of this city
     final private double latitude;
     final private double longitude;
 
-    public City(String name, String state, Population population, double latitude, double longitude, int cityId, int stateId) {
+    public City(String name, Population population, double latitude, double longitude, int cityId) {
         this.name = name;
-        this.state_name = state;
         this.population = population;
         this.latitude = latitude;
         this.longitude = longitude;
         this.cityId = cityId;
-        this.stateId = stateId;
+        this.num_air = (int) (Parameter.max_air * Math.sqrt(population.getTotalPop()) / Parameter.pop_scale);
+        this.num_train = (int) (Parameter.max_train * Math.sqrt(population.getTotalPop()) / Parameter.pop_scale);
+        this.num_ship = (int) (Parameter.max_ship * Math.sqrt(population.getTotalPop()) / Parameter.pop_scale);
+        System.out.println(name + ": " + " num_air " + num_air + " num_train " + num_train + " num_ship " + num_ship );
     }
 
     public static void computeDistance(){
@@ -164,12 +164,14 @@ public class City {
     public Population getPopulation() { return population; }
 
     public String getName() { return name; }
-    public String getState() { return state_name;}
 
     public double getLatitude() { return latitude; }
 
     public double getLongitude() { return longitude; }
 
     public int getCityId(){ return cityId;}
-    public int getstateId(){ return stateId;}
+
+    public double[] getPopProb() { return pop_prob;}
+
+    public double[] getDistProb() { return distance_prob[this.getCityId()];}
 }
