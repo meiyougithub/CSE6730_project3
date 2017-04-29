@@ -10,20 +10,29 @@ public class Virus {
     // }
     
     public static void computeInfected(Population population) {
-        population.setPopInfected((int) (population.getPopInfected() + population.getPopInfected() * rate_spread));
-        population.setPopWithoutAntibody( (int) (poulation.getPopWithoutAntibody() - population.getPopInfected() * rate_spread));
+        int infected = (int) (population.getPopInfected() * rate_spread);
+        
+        population.setPopInfected(population.getPopInfected() + infected);
+        population.setPopWithoutAntibody( poulation.getPopWithoutAntibody() - infected);
         
     }
     
     public static void computeMorbidity(Population population) {
-        population.setPopSymptom( (int) ( population.getPopSymptom() + (population.getPopInfected() + population.getPopQuarantine()) * rate_morbidity ));
-        population.setPopInfected( (int) (population.getPopInfected() - population.getPopInfected() * rate_morbidity ));
-        population.setPopQuarantine( (int) (population.getPopQuarantine() - population.getPopQuarantine() * rate_morbidity ));
+        int morbidity_1 = (int) (population.getPopInfected() * rate_morbidity);
+        int morbidity_2 = (int) (population.getPopQuarantine() * rate_morbidity);
+        
+        population.setPopSymptom( population.getPopSymptom() + morbidity_1 + morbidity_2 );
+        population.setPopInfected( population.getPopInfected() - morbidity_1 );
+        population.setPopQuarantine( population.getPopQuarantine() - morbidity_2 );
     }
     
     public static void computeLethality(Population population) {
-        population.setPopDead( (int) (population.getPopDead() + population.getPopSymptom() * rate_lethality ));
-        population.setTotalPop( (int) (population.getTotalPop() - population.getPopSymptom() * rate_lethality ));
+        int dead = (int) (population.getPopSymptom() * rate_lethality);
+        
+        population.setPopDead( population.getPopDead() + dead );
+        population.setTotalPop( population.getTotalPop() - dead );
+        Population.grand_total_pop -= dead;
+        Population.grand_pop_dead += dead;
     }
 
     public static int quarantineToCure(Population population){
