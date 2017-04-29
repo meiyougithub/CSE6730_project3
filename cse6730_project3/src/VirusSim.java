@@ -16,8 +16,9 @@ public class VirusSim {
         int clock = 0;
         int tick = 60; // in minutes
         int days = 1; // one month = four weeks = 28 days
-        int compute_death[57];
-        int max_length = (int) (days * 24 * 60 / tick);
+        int[] compute_death= new int [57];
+        int max_length=24;
+        //int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
         myWindow.setSize(800, 600);
@@ -39,7 +40,7 @@ public class VirusSim {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             int id = -1;
             while ((line = br.readLine()) != null) {
-                if (id != -1 && id < num_cities) {
+                if (id != -1 && id<num_cities) {
                     String[] temp = line.split(csvsplit);
                     String city_name = temp[1];
                     String state_name = temp[2];
@@ -104,11 +105,11 @@ public class VirusSim {
                for (int i = 0; i < num_cities; i++)
                {
                    Population temp = cities[i].getPopulation();
-                   compute_death[cities[i].getstateId] += temp.getPopDead();
+                   compute_death[cities[i].getstateId()] += temp.getPopDead();
                }
                for (int i = 0; i < 57; i++)
                {
-                   System.out.println("state: %d, death: %d", i, compute_death[i]);
+                   System.out.printf("state: %d, death: %d/n", i, compute_death[i]);
                }
            }
             
