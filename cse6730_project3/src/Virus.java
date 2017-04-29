@@ -34,6 +34,7 @@ public class Virus {
             dead = population.getTotalPop()-population.getPopAntibody();
         }
         population.setPopDead( population.getPopDead() + dead );
+        population.setPopSymptom( population.getPopSymptom() - dead);
         population.setTotalPop( population.getTotalPop() - dead );
         Population.grand_total_pop -= dead;
         Population.grand_pop_dead += dead;
