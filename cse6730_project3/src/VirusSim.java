@@ -41,6 +41,7 @@ public class VirusSim {
                 if (id != -1 && id < num_cities) {
                     String[] temp = line.split(csvsplit);
                     String city_name = temp[1];
+                    String state_name = temp[2];
                     System.out.println(city_name);
                     System.out.println(temp[3].trim());
                     int total_population = Integer.parseInt(temp[3].trim());
@@ -48,7 +49,7 @@ public class VirusSim {
                     double longitude = Double.parseDouble(temp[7].trim());
                    // System.out.println(city_name +" "+ total_population+" "+latitude+" "+longitude);
                     Population pop_tmp = new Population(total_population);
-                    City city_tmp =new City(city_name,pop_tmp,latitude,longitude,id);
+                    City city_tmp =new City(city_name, state_name, pop_tmp,latitude,longitude,id);
                     cities[id]=city_tmp;
                 }
                 id++;
@@ -95,6 +96,7 @@ public class VirusSim {
                 cities[i].transportTurn(clock, debug);
 
             }
+            
             if (debug == 2){
                 if (clock % 2 == 0){
                     printEvents(events, clock);
