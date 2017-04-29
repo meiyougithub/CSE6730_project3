@@ -171,4 +171,5 @@ public class City {
     public double getLongitude() { return longitude; }
 
     public int getCityId(){ return cityId;}
+    public int getstateId(){ return stateId;}
 }
