@@ -16,8 +16,9 @@ public class City {
     final private double latitude;
     final private double longitude;
 
-    public City(String name, Population population, double latitude, double longitude, int cityId) {
+    public City(String name, String state, Population population, double latitude, double longitude, int cityId) {
         this.name = name;
+        this.state_name = state;
         this.population = population;
         this.latitude = latitude;
         this.longitude = longitude;
