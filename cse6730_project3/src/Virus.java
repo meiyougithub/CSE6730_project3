@@ -13,7 +13,7 @@ public class Virus {
         int infected = (int) (population.getPopInfected() * rate_spread);
         
         population.setPopInfected(population.getPopInfected() + infected);
-        population.setPopWithoutAntibody( poulation.getPopWithoutAntibody() - infected);
+        population.setPopWithoutAntibody( population.getPopWithoutAntibody() - infected);
         
     }
     
