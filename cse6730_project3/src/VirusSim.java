@@ -92,18 +92,19 @@ public class VirusSim {
                     }
                 }
             }
+           for (int i = 0; i < num_cities; i++)
+           {
+               Population temp = cities[i].getPopulation();
+
+               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
+           }
 
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
                 cities[i].virusTurn();
                 cities[i].transportTurn(clock, debug);
             }
-           for (int i = 0; i < num_cities; i++)
-           {
-               Population temp = cities[i].getPopulation();
-               if (temp.getPopDead() != 0)
-                   System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
-           }
+
 
            if (clock == 100)
            {
