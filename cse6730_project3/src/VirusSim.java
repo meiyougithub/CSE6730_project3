@@ -18,6 +18,7 @@ public class VirusSim {
         int days = 1; // one month = four weeks = 28 days
         int[] compute_death= new int [57];
         int max_length=24;
+        int[] grand_population_state = new int[57];
         //int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
@@ -75,6 +76,9 @@ public class VirusSim {
         // prepare pop prob vector
         for (int i = 0; i < num_cities; i++){
             cities[i].computePopProb();
+        }
+        for (int i = 0; i < num_cities; i++){
+            grand_population_state[cities[i].getstateId] += cities[i].getPopulation.getTotalPop();
         }
 
 
