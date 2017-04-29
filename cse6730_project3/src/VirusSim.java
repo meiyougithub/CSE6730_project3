@@ -1,8 +1,12 @@
 import java.util.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 
 public class VirusSim {
 
@@ -92,12 +96,6 @@ public class VirusSim {
                     }
                 }
             }
-           for (int i = 0; i < num_cities; i++)
-           {
-               Population temp = cities[i].getPopulation();
-
-               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
-           }
 
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
@@ -106,19 +104,19 @@ public class VirusSim {
             }
 
 
-           if (clock == 100)
-           {
-               for (int i = 0; i < num_cities; i++)
-               {
-                   Population temp = cities[i].getPopulation();
-                   System.out.println(cities[i].getName()+" "+temp.getTotalPop());
-                   compute_death[cities[i].getstateId()] += temp.getPopDead();
-               }
-               for (int i = 0; i < 57; i++)
-               {
-                   System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
-               }
-           }
+//           if (clock == 100)
+//           {
+//               for (int i = 0; i < num_cities; i++)
+//               {
+//                   Population temp = cities[i].getPopulation();
+//                   System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+//                   compute_death[cities[i].getstateId()] += temp.getPopDead();
+//               }
+//               for (int i = 0; i < 57; i++)
+//               {
+//                   System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
+//               }
+//           }
            if (debug == 2){
                 if (clock % 2 == 0){
                     printEvents(events, clock);
@@ -127,10 +125,30 @@ public class VirusSim {
            clock ++;
         }
         System.out.print("end\n");
+        for (int i = 0; i < num_cities; i++)
+        {
+            Population temp = cities[i].getPopulation();
+            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+            compute_death[cities[i].getstateId()] += temp.getPopDead();
+        }
+        JSONArray list = new JSONArray();
         for (int i = 0; i < 57; i++)
         {
-        System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
+            JSONObject obj = new JSONObject();
+            obj.put("id", i);
+            obj.put("dead", compute_death[i]);
+            list.add(obj);
         }
+        try(FileWriter file = new FileWriter("test.json")){
+            file.write(list.toString());
+            file.flush();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        System.out.print(list);
+//        for (int i = 0; i < 57; i++)
+//           System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
+
     }
 
 public static void printEvents(TreeSet events, int clock){
