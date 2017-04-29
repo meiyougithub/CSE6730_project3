@@ -10,15 +10,24 @@ public class Virus {
     // }
     
     public static void computeInfected(Population population) {
-        population.setPopInfected( (int) (population.getPopWithoutAntibody() * rate_spread) ); 
+        population.setPopInfected((int) (population.getPopInfected() + population.getPopInfected() * rate_spread));
+        population.setPopWithoutAntibody( (int) (poulation.getPopWithoutAntibody() - population.getPopInfected() * rate_spread));
+        
     }
     
     public static void computeMorbidity(Population population) {
-        population.setPopSymptom( (int) (population.getPopInfected() * rate_morbidity) );
+        population.setPopSymptom( (int) ( population.getPopSymptom() + (population.getPopInfected() + population.getPopQuarantine()) * rate_morbidity ));
+        population.setPopInfected( (int) (population.getPopInfected() - population.getPopInfected() * rate_morbidity ));
+        population.setPopQuarantine( (int) (population.getPopQuarantine() - population.getPopQuarantine() * rate_morbidity ));
     }
     
     public static void computeLethality(Population population) {
-        population.setPopDead( (int) (population.getPopSymptom() * rate_lethality) );
+        population.setPopDead( (int) (population.getPopDead() + population.getPopSymptom() * rate_lethality ));
+        population.setTotalPop( (int) (population.getTotalPop() - population.getPopSymptom() * rate_lethality ));
+    }
+
+    public static int quarantineToCure(Population population){
+        return population.getPopQuarantine() * rate_morbidity
     }
 
     public double getRateLethality() { return rate_lethality; }
