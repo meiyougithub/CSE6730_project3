@@ -102,8 +102,7 @@ public class VirusSim {
            {
                Population temp = cities[i].getPopulation();
                if (temp.getPopDead() != 0)
-                   System.out.println("clock: "+clock +" "+cities[i].getName()+" "+temp.getTotalPop()+" "+temp.getPopDead()+" "+temp.getPopInfected());
-               compute_death[cities[i].getstateId()] += temp.getPopDead();
+                   System.out.println("clock: "+clock +" "+cities[i].getName()+" "+temp.getTotalPop()+" "+temp.getPopDead()+" "+temp.getPopInfected()+" "+temp.getPopSymptom()+" "+temp.getPopWithoutAntibody()+" "+temp.getPopQuarantine());
            }
 
            if (clock == 100)
