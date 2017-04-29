@@ -27,7 +27,7 @@ public class Virus {
     }
 
     public static int quarantineToCure(Population population){
-        return population.getPopQuarantine() * rate_morbidity
+        return (int) (population.getPopQuarantine() * rate_morbidity);
     }
 
     public double getRateLethality() { return rate_lethality; }
