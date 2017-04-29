@@ -30,7 +30,7 @@ public class Transportation {
         int total_pop = population.getTotalPop();
         int pop_infected = population.getPopInfected();
         int pop_antibody = population.getPopAntibody();
-//        int pop_withoutantibody = population.getPopWithoutAntibody();
+        int pop_withoutantibody = population.getPopWithoutAntibody();
 
         // Set the destination of this trip
         City destination = getDestination(departure, trip_type);
@@ -67,7 +67,7 @@ public class Transportation {
         }
 
         // Set the number of three type passengers
-        setTripInfo(num_passenger, total_pop, pop_infected, pop_antibody);
+        setTripInfo(num_passenger, total_pop, pop_infected, pop_antibody, pop_withoutantibody);
         event = new TransportEvent((int) (current_time + trip_time), departure, destination, num_infected, num_antibody, num_withoutantibody, trip_type);
         return event;
     }
@@ -100,10 +100,11 @@ public class Transportation {
         return VirusSim.cities[index];
     }
 
-    public static void setTripInfo(int num_passenger, int total_pop, int pop_infected, int pop_antibody) {
-        num_infected = (int) (num_passenger / total_pop * pop_infected);
-        num_antibody = (int) (num_passenger / total_pop * pop_antibody);
-        num_withoutantibody = num_passenger - num_infected - num_antibody;
+    public static void setTripInfo(int num_passenger, int total_pop, int pop_infected, int pop_antibody, int pop_withoutantibody) {
+        num_infected = (int) (num_passenger * 1.0 / total_pop * pop_infected);
+        num_antibody = (int) (num_passenger * 1.0 / total_pop * pop_antibody);
+        int tmp = num_passenger - num_infected - num_antibody;
+        num_withoutantibody = (tmp < pop_withoutantibody)? tmp : pop_withoutantibody;
     }
 
     // public double getAirSpeed() { return air_speed; }
