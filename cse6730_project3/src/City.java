@@ -11,18 +11,20 @@ public class City {
     private String state_name;
 
     private int cityId;
+    private int stateId;
 
     // Latitude and longitude of this city
     final private double latitude;
     final private double longitude;
 
-    public City(String name, String state, Population population, double latitude, double longitude, int cityId) {
+    public City(String name, String state, Population population, double latitude, double longitude, int cityId, int stateId) {
         this.name = name;
         this.state_name = state;
         this.population = population;
         this.latitude = latitude;
         this.longitude = longitude;
         this.cityId = cityId;
+        this.stateId = stateId;
     }
 
     public static void computeDistance(){
