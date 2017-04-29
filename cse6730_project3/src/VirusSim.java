@@ -16,7 +16,7 @@ public class VirusSim {
         int clock = 0;
         int tick = 60; // in minutes
         int days = 1; // one month = four weeks = 28 days
-        int compute_death[51];
+        int compute_death[57];
         int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
@@ -99,7 +99,18 @@ public class VirusSim {
                 cities[i].transportTurn(clock, debug);
 
             }
-           
+           if (clock == 300)
+           {
+               for (int i = 0; i < num_cities; i++)
+               {
+                   Population temp = cities[i].getPopulation();
+                   compute_death[cities[i].getstateId] += temp.getPopDead();
+               }
+               for (int i = 0; i < 57; i++)
+               {
+                   System.out.println("state: %d, death: %d", i, compute_death[i]);
+               }
+           }
             
             if (debug == 2){
                 if (clock % 2 == 0){
@@ -107,6 +118,7 @@ public class VirusSim {
                 }
 
             }
+           
            clock ++;
         }
         System.out.print("end");
