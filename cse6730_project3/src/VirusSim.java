@@ -96,6 +96,11 @@ public class VirusSim {
                     }
                 }
             }
+           for (int i = 0; i < num_cities; i++)
+           {
+               Population temp = cities[i].getPopulation();
+               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
+           }
 
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
@@ -145,7 +150,7 @@ public class VirusSim {
         }catch (IOException e){
             e.printStackTrace();
         }
-        System.out.print(list);
+
 //        for (int i = 0; i < 57; i++)
 //           System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
 
