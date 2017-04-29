@@ -51,7 +51,6 @@ public class VirusSim {
                     double latitude = Double.parseDouble(temp[6].trim());
                     double longitude = Double.parseDouble(temp[7].trim());
                     int state_id = Integer.parseInt(temp[8].trim());
-                   // System.out.println(city_name +" "+ total_population+" "+latitude+" "+longitude);
                     Population pop_tmp = new Population(total_population);
                     City city_tmp =new City(city_name, state_name, pop_tmp,latitude,longitude,id,state_id);
                     cities[id]=city_tmp;
@@ -109,13 +108,13 @@ public class VirusSim {
                }
                for (int i = 0; i < 57; i++)
                {
-                   System.out.printf("state: %d, death: %d/n", i, compute_death[i]);
+                   System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
                }
            }
             
             if (debug == 2){
                 if (clock % 2 == 0){
-                    printEvents(events, clock);
+                  printEvents(events, clock);
                 }
 
             }
@@ -123,6 +122,10 @@ public class VirusSim {
            clock ++;
         }
         System.out.print("end");
+        for (int i = 0; i < 57; i++)
+        {
+            System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
+        }
     }
 
     public static void printEvents(TreeSet events, int clock){
