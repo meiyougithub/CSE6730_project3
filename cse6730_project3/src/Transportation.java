@@ -27,10 +27,6 @@ public class Transportation {
     public static TransportEvent depart(double current_time, City departure, int trip_type) {
         // Get the information of the population at departure city
         Population population = departure.getPopulation();
-        int total_pop = population.getTotalPop();
-        int pop_infected = population.getPopInfected();
-        int pop_antibody = population.getPopAntibody();
-        int pop_withoutantibody = population.getPopWithoutAntibody();
 
         // Set the destination of this trip
         City destination = getDestination(departure, trip_type);
@@ -67,8 +63,9 @@ public class Transportation {
         }
 
         // Set the number of three type passengers
-        setTripInfo(num_passenger, total_pop, pop_infected, pop_antibody, pop_withoutantibody);
+        setTripInfo(population, num_passenger);
         event = new TransportEvent((int) (current_time + trip_time), departure, destination, num_infected, num_antibody, num_withoutantibody, trip_type);
+        updatePopulation(population, event);
         return event;
     }
 
@@ -100,11 +97,23 @@ public class Transportation {
         return VirusSim.cities[index];
     }
 
-    public static void setTripInfo(int num_passenger, int total_pop, int pop_infected, int pop_antibody, int pop_withoutantibody) {
+    public static void setTripInfo(Population population, int num_passenger) {
+        int total_pop = population.getTotalPop();
+        int pop_infected = population.getPopInfected();
+        int pop_antibody = population.getPopAntibody();
+        int pop_withoutantibody = population.getPopWithoutAntibody();
+        
         num_infected = (int) (num_passenger * 1.0 / total_pop * pop_infected);
         num_antibody = (int) (num_passenger * 1.0 / total_pop * pop_antibody);
         int tmp = num_passenger - num_infected - num_antibody;
         num_withoutantibody = (tmp < pop_withoutantibody)? tmp : pop_withoutantibody;
+    }
+    
+    public static void updatePopulation(Population population, TranspotEvent event) {
+        population.setTotalPop( population.getTotalPop() - event.getNumPassenger() );
+        population.setPopInfected( population.getPopInfected() - event.getNumInfected() );
+        population.setPopAntibody( population.getPopAntibody() - event.getNumAntibody);
+        population.setPopWithoutAntibody( population.getPopWithoutAntibody() - event.getNumWithoutAntibody());
     }
 
     // public double getAirSpeed() { return air_speed; }
