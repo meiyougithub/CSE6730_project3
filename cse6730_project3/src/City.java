@@ -1,6 +1,9 @@
+import com.sun.xml.internal.rngom.digested.DDataPattern;
+
 import java.util.*;
 
 public class City {
+    public static boolean warning = false;
     private Population population;
     private String name;
     private int num_air = 1, num_train = 1, num_ship = 1;
@@ -35,7 +38,7 @@ public class City {
         distance_mat = new double[VirusSim.num_cities][VirusSim.num_cities];
         for (int i = 0; i < VirusSim.num_cities ; i++){
             for (int j = i + 1 ; j < VirusSim.num_cities; j++){
-                distance_mat[i][j] = distance(VirusSim.cities[i], VirusSim.cities[j]);
+                distance_mat[i][j] = 1. / distance(VirusSim.cities[i], VirusSim.cities[j]);
                 distance_mat[j][i] = distance_mat[i][j];
             }
         }
@@ -80,9 +83,20 @@ public class City {
     }
 
     public void hospitalTurn() {
-        Hospital.quarantine(population);
-        Hospital.vaccinate(population);
-        Hospital.cure(population);
+        if (!warning){
+            if ((this.getPopulation().getPopDead() + this.getPopulation().getPopSymptom()) >= Parameter.threshold){
+
+                warning = true;
+                System.out.println("Warning is on!!!" + this.getName() + " " + this.getPopulation().getPopDead() + " " + this.getPopulation().getPopSymptom());
+            }
+        }
+        if (warning){
+            Hospital.quarantine(population);
+        }
+        if (Hospital.research){
+            Hospital.vaccinate(population);
+            Hospital.cure(population);
+        }
     }
 
     public void virusTurn() {

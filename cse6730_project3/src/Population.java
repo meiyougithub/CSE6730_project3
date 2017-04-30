@@ -19,7 +19,7 @@ public class Population {
     
     public Population(int total_pop) {
         this.total_pop = total_pop;
-        this.pop_infected = 5;
+        this.pop_infected = 1;
         this.pop_antibody = (int) (total_pop * antibody_ratio);
         this.pop_withoutantibody = total_pop - pop_antibody - this.pop_infected;
         this.pop_dead = 0;

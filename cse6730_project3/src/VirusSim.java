@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import sun.util.locale.provider.HostLocaleProviderAdapter;
 
 
 public class VirusSim {
@@ -83,6 +84,15 @@ public class VirusSim {
 
 
        while (clock < max_length) {
+            if (City.warning && !Hospital.research){
+                if (Parameter.countdown > 0){
+                    Parameter.countdown --;
+                }
+                else{
+                    Hospital.research = true;
+                    System.out.println("Vaccine made!");
+                }
+            }
             if (!events.isEmpty()) {
                 TransportEvent temp_event = events.first();
                 while (temp_event.getDestTime() == clock) {

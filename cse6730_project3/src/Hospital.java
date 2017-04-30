@@ -1,4 +1,5 @@
 public class Hospital {
+    public static boolean research = false;
     private static int max_vaccine = Parameter.max_vaccine;
     private static int max_patient = Parameter.max_patient;
     private static int max_quarantine = Parameter.max_quarantine;

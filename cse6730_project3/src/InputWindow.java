@@ -23,14 +23,14 @@ public class InputWindow extends javax.swing.JFrame{
         t_asm.setEditable(false);
         t_tsm.setEditable(false);
         t_ssm.setEditable(false);
-        t_rs.setText(Double.toString(20));
+        t_rs.setText(Double.toString(1.05));
         t_rm.setText(Double.toString(20));
         t_rl.setText(Double.toString(20));
         t_ar.setText(Double.toString(0.1));
         t_mv.setText(Integer.toString(100));
         t_mp.setText(Integer.toString(100));
         t_mq.setText(Integer.toString(100));
-        t_cr.setText(Double.toString(0));
+        t_cr.setText(Double.toString(3));
         t_cn.setText(Integer.toString(3));
     }
 
@@ -314,7 +314,7 @@ public class InputWindow extends javax.swing.JFrame{
         Parameter.max_vaccine=Integer.parseInt(t_mv.getText());
         Parameter.max_patient=Integer.parseInt(t_mp.getText());
         Parameter.max_quarantine=Integer.parseInt(t_mq.getText());
-        Parameter.cure_rate=Double.parseDouble(t_cr.getText());
+        Parameter.cure_rate=Double.parseDouble(t_cr.getText())/100.;
         num_city=Integer.parseInt(t_cn.getText());
         pressed_or_not=true;
     }
