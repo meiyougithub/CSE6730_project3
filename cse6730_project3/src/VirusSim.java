@@ -156,18 +156,18 @@ public class VirusSim {
 
     }
 
-public static void printEvents(TreeSet events, int clock){
+    public static void printEvents(TreeSet events, int clock){
 //        System.out.println("===== Events print out at clock " + clock + " with size of " + events.size() + " =====");
 //        for (Object ev : events) {
 //            printEvent((TransportEvent)ev);
 //        }
-        }
+    }
 
-public static void printEvent(TransportEvent ev){
+    public static void printEvent(TransportEvent ev){
 //        System.out.print("(time: " + ev.getDestTime());
 //        System.out.print(", daoda: " + ev.getDestCity().getName());
 //        System.out.print(", chufa: " + ev.getDeptCity().getName());
 //        System.out.print(", type: " + ev.getType());
 //        System.out.println(")");
-        }
-        }
+    }
+}

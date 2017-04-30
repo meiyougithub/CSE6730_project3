@@ -93,10 +93,8 @@ public class City {
 
     public void transportTurn(int current_time) {
         // Set air event
-//        System.out.println("Number of airplane: " + num_air);
         for (int i = 0; i < num_air; i++) {
             TransportEvent airEvent = Transportation.depart(current_time, this, TransportEvent.AIR);
-//            System.out.println("Total number of passengers in air: " + airEvent.getNumPassenger() + " and infected: " + airEvent.getNumInfected() + "    antibody: " + airEvent.getNumAntibody());
             VirusSim.events.add(airEvent);
         }
         // Set train event
@@ -130,11 +128,9 @@ public class City {
             }
         } else {
             // Set air event
-            System.out.println("Number of airplane: " + num_air + " depart from " + this.getName());
             for (int i = 0; i < num_air; i++) {
                 TransportEvent airEvent = Transportation.depart(current_time, this, TransportEvent.AIR);
                 VirusSim.events.add(airEvent);
-                System.out.println("Total number of passengers in air: " + airEvent.getNumPassenger() + "(" + population.getTotalPop() + ") and infected: " + airEvent.getNumInfected() + "(" + population.getPopInfected() + ")     antibody: " + airEvent.getNumAntibody() + "(" + population.getPopAntibody() + ")" );
                 //System.out.print("At " + current_time + ", " + this.getName() + " add event: ");
                 //VirusSim.printEvent(airEvent);
             }
