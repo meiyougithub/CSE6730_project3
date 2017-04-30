@@ -20,10 +20,10 @@ public class VirusSim {
         int debug = 2;
         int clock = 0;
         int tick = 60; // in minutes
-        int days = 1; // one month = four weeks = 28 days
+        int days = 28; // one month = four weeks = 28 days
         int[] compute_death= new int [57];
-        int max_length=300;
-        //int max_length = (int) (days * 24 * 60 / tick);
+//        int max_length=50;
+        int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
         myWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //2. Size the frame
         myWindow.setSize(800, 600);
@@ -95,7 +95,8 @@ public class VirusSim {
             }
             if (!events.isEmpty()) {
                 TransportEvent temp_event = events.first();
-                while (temp_event.getDestTime() == clock) {
+                System.out.println(temp_event.getDestTime() + " " + clock);
+                while (temp_event.getDestTime() <= clock) {
                     events.pollFirst();
                     City temp_city = temp_event.getDestCity();
                     temp_city.handle(temp_event);
@@ -106,16 +107,17 @@ public class VirusSim {
                     }
                 }
             }
-//           for (int i = 0; i < num_cities; i++)
-//           {
-//               Population temp = cities[i].getPopulation();
-//               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+(int)temp.getTotalPop()+"   dead: "+(int)temp.getPopDead()+"   infected: "+(int)temp.getPopInfected()+"   symptom: "+(int)temp.getPopSymptom()+"   anitbody: "+(int)temp.getPopAntibody()+"   no anti: "+(int)temp.getPopWithoutAntibody()+"    Quara: "+(int)temp.getPopQuarantine());
-//           }
+           for (int i = 0; i < num_cities; i++)
+           {
+               Population temp = cities[i].getPopulation();
+               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
+           }
 
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
                 cities[i].virusTurn();
-                cities[i].transportTurn(clock, debug);
+                if (max_length - clock > 50)
+                    cities[i].transportTurn(clock, debug);
             }
 
 
@@ -141,13 +143,13 @@ public class VirusSim {
         }
 
         System.out.println(events.size());
-        System.out.println(events.first().getDestTime());
+        System.out.println(events.first().getDeptCity().getName()+ " !!! " + events.first().getDestCity().getName());
 
         System.out.print("end\n");
         for (int i = 0; i < num_cities; i++)
         {
             Population temp = cities[i].getPopulation();
-//            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
             compute_death[cities[i].getStateId()] += temp.getPopDead();
         }
         JSONArray list = new JSONArray();

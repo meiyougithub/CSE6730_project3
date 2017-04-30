@@ -49,7 +49,8 @@ public class City {
     public static void computePop(){
         pop_mat = new double[VirusSim.num_cities];
         for (int i = 0; i < VirusSim.num_cities ; i++){
-            pop_mat[i] = VirusSim.cities[i].getPopulation().getTotalPop();
+            pop_mat[i] = Math.sqrt(VirusSim.cities[i].getPopulation().getTotalPop());
+            Population.grand_sq_total_pop += pop_mat[i];
         }
 //        Parameter.printMatrix(pop_mat);
     }
@@ -57,7 +58,7 @@ public class City {
     public void computePopProb(){
         pop_prob = new double[VirusSim.num_cities];
         double temp_sum = 0;
-        double temp_total = Population.grand_total_pop - this.getPopulation().getTotalPop();
+        double temp_total = Population.grand_sq_total_pop - Math.sqrt(this.getPopulation().getTotalPop());
         for (int i = 0; i < VirusSim.num_cities; i++){
             pop_prob[i] = temp_sum +  ((i == this.getCityId()) ? 0 : pop_mat[i]) / temp_total;
             temp_sum = pop_prob[i];

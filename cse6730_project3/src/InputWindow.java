@@ -23,10 +23,10 @@ public class InputWindow extends javax.swing.JFrame{
         t_asm.setEditable(false);
         t_tsm.setEditable(false);
         t_ssm.setEditable(false);
-        t_rs.setText(Double.toString(1.05));
-        t_rm.setText(Double.toString(20));
-        t_rl.setText(Double.toString(20));
-        t_ar.setText(Double.toString(0.1));
+        t_rs.setText(Double.toString(0.028));
+        t_rm.setText(Double.toString(1.4));
+        t_rl.setText(Double.toString(70));
+        t_ar.setText(Double.toString(0.0001));
         t_mv.setText(Integer.toString(100));
         t_mp.setText(Integer.toString(100));
         t_mq.setText(Integer.toString(100));

@@ -1,4 +1,5 @@
 public class Population {
+    public static double grand_sq_total_pop = 0.0;
     public static double grand_total_pop = 0.0;
     public static double grand_pop_antibody = 0.0;
     public static double grand_pop_withoutantibody = 0.0;

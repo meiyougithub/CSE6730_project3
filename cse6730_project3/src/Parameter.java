@@ -20,7 +20,7 @@ public class Parameter {
     public static int threshold = 20;
     public static int countdown = 7 * 24;
 
-    public static int max_air = 60, max_train = 40, max_ship = 20;
+    public static int max_air = 30, max_train = 20, max_ship = 10;
     public static double pop_scale = 3000.0;
 
     public Parameter(int apm, int tpm, int spm, double asm, double tsm, double ssm, double rs, double rm, double rl, double ar, double mv, double mp, double mq, double cr) {
