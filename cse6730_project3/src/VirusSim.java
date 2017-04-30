@@ -12,7 +12,7 @@ public class VirusSim {
 
     public static City[] cities;
     public static TreeSet<TransportEvent> events = new TreeSet<>();
-    public static Random rand = new Random();
+    public static Random rand = new Random(0);
     public static int num_cities = 0;
 
     public static void main(String[] args){
@@ -21,7 +21,6 @@ public class VirusSim {
         int tick = 60; // in minutes
         int days = 1; // one month = four weeks = 28 days
         int[] compute_death= new int [57];
-        int[] total_state_pop = new int [57];
         int max_length=300;
         //int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
@@ -80,14 +79,6 @@ public class VirusSim {
         // prepare pop prob vector
         for (int i = 0; i < num_cities; i++){
             cities[i].computePopProb();
-        }
-        for (int i = 0; i < num_cities; i++){
-            total_state_pop[cities[i].getstateId()] += cities[i].getPopulation().getTotalPop();
-        }
-        for (int i= 0; i < 57; i++)
-        {
-            if (total_state_pop[i] == 0)
-                total_state_pop[i] = 1;
         }
 
 
@@ -150,11 +141,7 @@ public class VirusSim {
         {
             JSONObject obj = new JSONObject();
             obj.put("id", i);
-            double death_rate = (compute_death[i]*1.0) / total_state_pop[i];
-            if (death_rate > 1)
-                death_rate = 1.0;
-            System.out.println(death_rate);
-            obj.put("dead", death_rate);
+            obj.put("dead", compute_death[i]);
             list.add(obj);
         }
         try(FileWriter file = new FileWriter("test.json")){

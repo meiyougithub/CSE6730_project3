@@ -30,9 +30,9 @@ public class Virus {
     
     public static void computeLethality(Population population) {
         int dead = (int) (population.getPopSymptom() * rate_lethality);
-        if (dead > population.getTotalPop()-population.getPopAntibody()){
-            dead = population.getTotalPop()-population.getPopAntibody();
-        }
+//        if (dead > population.getTotalPop()-population.getPopAntibody()){
+//            dead = population.getTotalPop()-population.getPopAntibody();
+//        }
         population.setPopDead( population.getPopDead() + dead );
         population.setPopSymptom( population.getPopSymptom() - dead);
         population.setTotalPop( population.getTotalPop() - dead );

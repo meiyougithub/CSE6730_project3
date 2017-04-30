@@ -83,7 +83,7 @@ public class Transportation {
 
     public static City getDestination(City departure, int trip_type) {
         // Randomly choose the destination city
-        double prob = Math.random();
+        double prob = VirusSim.rand.nextDouble();
         int index;
         double[] prob_array;
         if (trip_type != TransportEvent.SHIP){
@@ -102,6 +102,8 @@ public class Transportation {
         int pop_infected = population.getPopInfected();
         int pop_antibody = population.getPopAntibody();
         int pop_withoutantibody = population.getPopWithoutAntibody();
+
+        num_passenger = (num_passenger < total_pop)? num_passenger : total_pop;
         
         num_infected = (int) (num_passenger * 1.0 / total_pop * pop_infected);
         num_antibody = (int) (num_passenger * 1.0 / total_pop * pop_antibody);

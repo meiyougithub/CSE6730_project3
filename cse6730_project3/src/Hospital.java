@@ -35,7 +35,7 @@ public class Hospital {
     public static void cure(Population population) {
         int pop_symptom = population.getPopSymptom();
         int max_cured = (pop_symptom < max_patient)? pop_symptom : max_patient;
-        population.setPopAntibody( population.getPopAntibody() + (int) (max_cured * max_cured) );
-        population.setPopSymptom( population.getPopSymptom() - (int) (max_cured * max_cured) );
+        population.setPopAntibody( population.getPopAntibody() + (int) (max_cured * cure_rate) );
+        population.setPopSymptom( population.getPopSymptom() - (int) (max_cured * cure_rate) );
     }
 }
