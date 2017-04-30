@@ -10,7 +10,7 @@ public class Virus {
     // }
     
     public static void computeInfected(Population population) {
-        int infected = (int) (population.getPopInfected() * rate_spread);
+        double infected = population.getPopInfected() * rate_spread;
         if (infected > population.getPopWithoutAntibody()){
             infected = population.getPopWithoutAntibody();
         }
@@ -20,8 +20,8 @@ public class Virus {
     }
     
     public static void computeMorbidity(Population population) {
-        int morbidity_1 = (int) (population.getPopInfected() * rate_morbidity);
-        int morbidity_2 = (int) (population.getPopQuarantine() * rate_morbidity);
+        double morbidity_1 = population.getPopInfected() * rate_morbidity;
+        double morbidity_2 = population.getPopQuarantine() * rate_morbidity;
         
         population.setPopSymptom( population.getPopSymptom() + morbidity_1 + morbidity_2 );
         population.setPopInfected( population.getPopInfected() - morbidity_1 );
@@ -29,7 +29,7 @@ public class Virus {
     }
     
     public static void computeLethality(Population population) {
-        int dead = (int) (population.getPopSymptom() * rate_lethality);
+        double dead = population.getPopSymptom() * rate_lethality;
 //        if (dead > population.getTotalPop()-population.getPopAntibody()){
 //            dead = population.getTotalPop()-population.getPopAntibody();
 //        }
@@ -40,8 +40,8 @@ public class Virus {
         Population.grand_pop_dead += dead;
     }
 
-    public static int quarantineToCure(Population population){
-        return (int) (population.getPopQuarantine() * rate_morbidity);
+    public static double quarantineToCure(Population population){
+        return population.getPopQuarantine() * rate_morbidity;
     }
 
     public double getRateLethality() { return rate_lethality; }

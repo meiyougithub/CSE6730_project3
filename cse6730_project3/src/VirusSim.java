@@ -106,11 +106,11 @@ public class VirusSim {
                     }
                 }
             }
-           for (int i = 0; i < num_cities; i++)
-           {
-               Population temp = cities[i].getPopulation();
-               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
-           }
+//           for (int i = 0; i < num_cities; i++)
+//           {
+//               Population temp = cities[i].getPopulation();
+//               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+(int)temp.getTotalPop()+"   dead: "+(int)temp.getPopDead()+"   infected: "+(int)temp.getPopInfected()+"   symptom: "+(int)temp.getPopSymptom()+"   anitbody: "+(int)temp.getPopAntibody()+"   no anti: "+(int)temp.getPopWithoutAntibody()+"    Quara: "+(int)temp.getPopQuarantine());
+//           }
 
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
@@ -139,12 +139,16 @@ public class VirusSim {
            }
            clock ++;
         }
+
+        System.out.println(events.size());
+        System.out.println(events.first().getDestTime());
+
         System.out.print("end\n");
         for (int i = 0; i < num_cities; i++)
         {
             Population temp = cities[i].getPopulation();
-            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
-            compute_death[cities[i].getstateId()] += temp.getPopDead();
+//            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+            compute_death[cities[i].getStateId()] += temp.getPopDead();
         }
         JSONArray list = new JSONArray();
         for (int i = 0; i < 57; i++)

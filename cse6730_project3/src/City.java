@@ -31,7 +31,7 @@ public class City {
         this.num_air = (int) (Parameter.max_air * Math.sqrt(population.getTotalPop()) / Parameter.pop_scale);
         this.num_train = (int) (Parameter.max_train * Math.sqrt(population.getTotalPop()) / Parameter.pop_scale);
         this.num_ship = (int) (Parameter.max_ship * Math.sqrt(population.getTotalPop()) / Parameter.pop_scale);
-        System.out.println(name + ": " + " num_air " + num_air + " num_train " + num_train + " num_ship " + num_ship );
+//        System.out.println(name + ": " + " num_air " + num_air + " num_train " + num_train + " num_ship " + num_ship );
     }
 
     public static void computeDistance(){
@@ -42,7 +42,7 @@ public class City {
                 distance_mat[j][i] = distance_mat[i][j];
             }
         }
-        Parameter.printMatrix(distance_mat);
+//        Parameter.printMatrix(distance_mat);
 
     }
 
@@ -51,13 +51,13 @@ public class City {
         for (int i = 0; i < VirusSim.num_cities ; i++){
             pop_mat[i] = VirusSim.cities[i].getPopulation().getTotalPop();
         }
-        Parameter.printMatrix(pop_mat);
+//        Parameter.printMatrix(pop_mat);
     }
 
     public void computePopProb(){
         pop_prob = new double[VirusSim.num_cities];
         double temp_sum = 0;
-        double temp_total = (double)(Population.grand_total_pop - this.getPopulation().getTotalPop());
+        double temp_total = Population.grand_total_pop - this.getPopulation().getTotalPop();
         for (int i = 0; i < VirusSim.num_cities; i++){
             pop_prob[i] = temp_sum +  ((i == this.getCityId()) ? 0 : pop_mat[i]) / temp_total;
             temp_sum = pop_prob[i];
@@ -79,7 +79,7 @@ public class City {
                 prefix = distance_prob[i][j];
             }
         }
-        Parameter.printMatrix(distance_prob);
+//        Parameter.printMatrix(distance_prob);
     }
 
     public void hospitalTurn() {
@@ -87,7 +87,7 @@ public class City {
             if ((this.getPopulation().getPopDead() + this.getPopulation().getPopSymptom()) >= Parameter.threshold){
 
                 warning = true;
-                System.out.println("Warning is on!!!" + this.getName() + " " + this.getPopulation().getPopDead() + " " + this.getPopulation().getPopSymptom());
+                System.out.println("Warning is on!!! " + this.getName() + " " + (int)this.getPopulation().getPopDead() + " " + (int)this.getPopulation().getPopSymptom());
             }
         }
         if (warning){
@@ -189,7 +189,7 @@ public class City {
     public double getLongitude() { return longitude; }
 
     public int getCityId(){ return cityId;}
-    public int getstateId(){ return stateId;}
+    public int getStateId(){ return stateId;}
 
     public double[] getPopProb() { return pop_prob;}
 

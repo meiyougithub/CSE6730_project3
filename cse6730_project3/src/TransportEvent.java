@@ -8,15 +8,15 @@ public class TransportEvent implements Comparable<TransportEvent> {
     final static int SHIP = 2;
 	
 	private int dest_time;
-	private int num_infected;
-    private int num_antibody;
-    private int num_withoutantibody;
+	private double num_infected;
+    private double num_antibody;
+    private double num_withoutantibody;
     private int trip_type;
 	private City dest_city;
 	private City dept_city;
 	private int id;
 
-	public TransportEvent(int dest_time, City dept_city, City dest_city, int num_infected, int num_antibody, int num_withoutantibody, int trip_type){
+	public TransportEvent(int dest_time, City dept_city, City dest_city, double num_infected, double num_antibody, double num_withoutantibody, int trip_type){
 		this.dest_time = dest_time;
 		this.dept_city = dept_city;
         this.dest_city = dest_city;
@@ -39,10 +39,11 @@ public class TransportEvent implements Comparable<TransportEvent> {
     public int getDestTime() { return dest_time; }
     public City getDestCity() { return dest_city; }
     public City getDeptCity() { return dept_city; }
-    public int getNumPassenger() { return num_infected + num_antibody + num_withoutantibody; }
-    public int getNumInfected() { return num_infected; }
-    public int getNumAntibody() { return num_antibody; }
-    public int getNumWithoutAntibody() { return num_withoutantibody; }
+    public double getNumPassenger() { return num_infected + num_antibody + num_withoutantibody; }
+    public double getNumInfected() { return num_infected; }
+    public double getNumAntibody() { return num_antibody; }
+    public double getNumWithoutAntibody() { return num_withoutantibody; }
+
     public String getType(){
 	    if (trip_type == 0){
 	        return "AIR";
