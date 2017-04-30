@@ -81,6 +81,13 @@ public class VirusSim {
         for (int i = 0; i < num_cities; i++){
             cities[i].computePopProb();
         }
+        for (int i = 0; i < num_cities; i++) {
+        total_state_pop[cities[i].getstateId()] += cities[i].getPopulation().getTotalPop();
+    }
+    for (int i = 0; i < 57; i++) {
+        if (total_state_pop[i] == 0)
+            total_state_pop[i] = 1;
+    }
 
 
        while (clock < max_length) {
@@ -160,7 +167,7 @@ public class VirusSim {
             obj.put("dead", compute_death[i]);
             list.add(obj);
         }
-        try(FileWriter file = new FileWriter("test.json")){
+        try(FileWriter file = new FileWriter("end.json")){
             file.write(list.toString());
             file.flush();
         }catch (IOException e){
