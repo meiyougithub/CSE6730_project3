@@ -1,4 +1,4 @@
-import com.sun.xml.internal.rngom.digested.DDataPattern;
+//import com.sun.xml.internal.rngom.digested.DDataPattern;
 
 import java.util.*;
 
@@ -88,7 +88,7 @@ public class City {
             if ((this.getPopulation().getPopDead() + this.getPopulation().getPopSymptom()) >= Parameter.threshold){
 
                 warning = true;
-                System.out.println("Warning is on!!! " + this.getName() + " " + (int)this.getPopulation().getPopDead() + " " + (int)this.getPopulation().getPopSymptom());
+                //System.out.println("Warning is on!!! " + this.getName() + " " + (int)this.getPopulation().getPopDead() + " " + (int)this.getPopulation().getPopSymptom());
             }
         }
         if (warning){

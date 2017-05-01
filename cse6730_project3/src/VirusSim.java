@@ -22,6 +22,8 @@ public class VirusSim {
         int tick = 60; // in minutes
         int days = 28; // one month = four weeks = 28 days
         int[] compute_death= new int [57];
+        int[] total_state_pop = new int[57];
+        FileWriter writer;
 //        int max_length=50;
         int max_length = (int) (days * 24 * 60 / tick);
         InputWindow myWindow = new InputWindow();
@@ -49,9 +51,9 @@ public class VirusSim {
                     String[] temp = line.split(csvsplit);
                     String city_name = temp[1];
                     String state_name = temp[2];
-                    System.out.println(city_name);
-                    System.out.println(state_name);
-                    System.out.println(temp[3].trim());
+                    //System.out.println(city_name);
+                    //System.out.println(state_name);
+                    //System.out.println(temp[3].trim());
                     int total_population = Integer.parseInt(temp[3].trim());
                     double latitude = Double.parseDouble(temp[6].trim());
                     double longitude = Double.parseDouble(temp[7].trim());
@@ -82,7 +84,7 @@ public class VirusSim {
             cities[i].computePopProb();
         }
         for (int i = 0; i < num_cities; i++) {
-        total_state_pop[cities[i].getstateId()] += cities[i].getPopulation().getTotalPop();
+        total_state_pop[cities[i].getStateId()] += cities[i].getPopulation().getTotalPop();
     }
     for (int i = 0; i < 57; i++) {
         if (total_state_pop[i] == 0)
@@ -90,19 +92,20 @@ public class VirusSim {
     }
 
 
-       while (clock < max_length) {
+
+        while (clock < max_length) {
             if (City.warning && !Hospital.research){
                 if (Parameter.countdown > 0){
                     Parameter.countdown --;
                 }
                 else{
                     Hospital.research = true;
-                    System.out.println("Vaccine made!");
+                    //System.out.println("Vaccine made!");
                 }
             }
             if (!events.isEmpty()) {
                 TransportEvent temp_event = events.first();
-                System.out.println(temp_event.getDestTime() + " " + clock);
+                //System.out.println(temp_event.getDestTime() + " " + clock);
                 while (temp_event.getDestTime() <= clock) {
                     events.pollFirst();
                     City temp_city = temp_event.getDestCity();
@@ -114,11 +117,11 @@ public class VirusSim {
                     }
                 }
             }
-           for (int i = 0; i < num_cities; i++)
-           {
-               Population temp = cities[i].getPopulation();
-               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
-           }
+//           for (int i = 0; i < num_cities; i++)
+//           {
+//               Population temp = cities[i].getPopulation();
+//               System.out.println("clock: "+clock +" "+cities[i].getName()+"   total pop: "+temp.getTotalPop()+"   dead: "+temp.getPopDead()+"   infected: "+temp.getPopInfected()+"   symptom: "+temp.getPopSymptom()+"   anitbody: "+temp.getPopAntibody()+"   no anti: "+temp.getPopWithoutAntibody()+"    Quara: "+temp.getPopQuarantine());
+//           }
 
             for (int i = 0; i < num_cities; i++){
                 cities[i].hospitalTurn();
@@ -126,53 +129,85 @@ public class VirusSim {
                 if (max_length - clock > 50)
                     cities[i].transportTurn(clock, debug);
             }
+//            for(int i = 0; i < 57; i++)
+//                compute_death[i] = 0;
+//            try{
+//                writer = new FileWriter("H7N9_grand_pop_q20.csv",true);
+//                writer.append(Double.toString(cities[0].getPopulation().grand_pop_dead)+",");
+//                System.out.println(cities[0].getPopulation().grand_pop_dead);
+//                writer.append("\n");
+//                writer.flush();
+//                writer.close();
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
 
+//            for (int i = 0; i < num_cities; i++)
+//            {
+//                Population temp = cities[i].getPopulation();
+//                System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+//                compute_death[cities[i].getStateId()] += temp.getPopDead();
+//            }
+//            try{
+//                writer = new FileWriter("death_rate.csv",true);
+//                for (int i = 0; i < 57; i++)
+//                {
+//                    double death_rate = ((double)(compute_death[i])) / total_state_pop[i];
+//                    writer.append(Double.toString(death_rate)+",");
+//                }
+//                writer.append("\n");
+//                writer.flush();
+//                writer.close();
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
 
-//           if (clock == 100)
-//           {
-//               for (int i = 0; i < num_cities; i++)
-//               {
-//                   Population temp = cities[i].getPopulation();
-//                   System.out.println(cities[i].getName()+" "+temp.getTotalPop());
-//                   compute_death[cities[i].getstateId()] += temp.getPopDead();
-//               }
-//               for (int i = 0; i < 57; i++)
-//               {
-//                   System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
-//               }
-//           }
            if (debug == 2){
                 if (clock % 2 == 0){
                     printEvents(events, clock);
                 }
            }
+
            clock ++;
         }
-
-        System.out.println(events.size());
-        System.out.println(events.first().getDeptCity().getName()+ " !!! " + events.first().getDestCity().getName());
-
         System.out.print("end\n");
+        System.out.println("city     death population");
         for (int i = 0; i < num_cities; i++)
         {
             Population temp = cities[i].getPopulation();
-            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+            int dead = (int)(temp.getPopDead());
+            System.out.println(cities[i].getName()+" "+dead);
             compute_death[cities[i].getStateId()] += temp.getPopDead();
         }
-        JSONArray list = new JSONArray();
-        for (int i = 0; i < 57; i++)
-        {
-            JSONObject obj = new JSONObject();
-            obj.put("id", i);
-            obj.put("dead", compute_death[i]);
-            list.add(obj);
-        }
-        try(FileWriter file = new FileWriter("end.json")){
-            file.write(list.toString());
-            file.flush();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+
+
+
+//        for (int i = 0; i < num_cities; i++)
+//        {
+//            Population temp = cities[i].getPopulation();
+//            System.out.println(cities[i].getName()+" "+temp.getTotalPop());
+//            compute_death[cities[i].getStateId()] += (int)(temp.getPopDead());
+//        }
+//        JSONArray list = new JSONArray();
+//        for (int i = 1; i < 57; i++)
+//        {
+//            System.out.println(compute_death[i]);
+//            double death_rate = ((double)(compute_death[i])) / total_state_pop[i];
+//            JSONObject obj = new JSONObject();
+//            obj.put("id", i);
+//            obj.put("dead", death_rate);
+//            list.add(obj);
+//        }
+//        try(FileWriter file = new FileWriter("test.json")){
+//            file.write(list.toString());
+//            file.flush();
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }
 
 //        for (int i = 0; i < 57; i++)
 //           System.out.printf("state: %d, death: %d\n", i, compute_death[i]);
